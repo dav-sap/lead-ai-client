@@ -1,0 +1,63 @@
+.border-rect{
+
+
+    fill:rgba(0, 0, 0,0);
+    stroke:url(#borderGradient);
+    stroke-width:2;
+}
+
+.submit-button {
+    background-color: transparent;
+    border: 2px solid transparent;
+    display: block;
+    padding: 0px;
+    cursor: pointer;
+    font-family: Heebo, Alef-Regular, sans-serif;
+    font-size: 18.8px;
+    text-align: center;
+    height: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 17px;
+    color: #ffffff;
+    z-index: 2;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+
+}
+.button-text {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    direction: rtl;
+}
+/*.submit-button:hover:enabled  > svg g:hover text{*/
+    /*display: block;*/
+    /*fill: #022b56;*/
+/*}*/
+/*.submit-button:hover:enabled  > svg g:hover  rect{*/
+    /*fill: rgba(255, 255, 255, 0.9);*/
+/*}*/
+.submit-button:hover:enabled{
+    background-color: rgba(255, 255, 255, 0.9);;
+
+    color: #022b56;
+}
+
+button:focus {outline:0;}
+.text-tag-rect {
+    /*fill: #ffffff;*/
+}
+.svg-border {
+    height:54px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+.input-button-wrapper {
+    position: relative;
+    margin-top: 5px;
+}

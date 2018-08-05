@@ -1,0 +1,192 @@
+.calendar-wrapper {
+    width: 300px;
+}
+.day {
+    padding: 9px;
+    font-weight: 300;
+    cursor: pointer;
+    border-radius: 19.5px;
+}
+.day:hover {
+    background-color: #fee404;
+    color: #000061;
+}
+.week {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15.4px;
+    letter-spacing: 0.5px;
+    color: #8b8b8e;
+}
+.text-input-date:hover > .arrow-open-date{
+    border-top: 9px solid rgba(255,255,255, 1);
+}
+.text-input-date:hover > .date-text{
+    opacity: 1 ;
+}
+.text-input-date:hover {
+    opacity: 1;
+    border: solid 1px rgba(255, 255, 255, 1);
+}
+
+.text-input-date {
+    width: 257.3px;
+    height: 49.5px;
+    border-radius: 26.3px;
+    border: solid 1px rgba(255, 255, 255, .5);
+    font-size: 18.8px;
+    font-family: Heebo, Alef-Regular, sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    background-color: transparent;
+}
+.answer-calendar-mobile {
+    position: relative;
+    height: 50px;
+}
+.date-location {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 257.3px;
+    
+}
+#date-picker {
+    height: 49.5px;
+    border-radius: 26.3px;
+    border: solid 1px rgba(255, 255, 255, .5);
+    font-size: 25px;
+    font-family: Heebo, Alef-Regular, sans-serif;
+    letter-spacing: 0.6px;
+    font-weight: 300;
+    color: #ffffff;    
+    cursor: pointer;
+    color: transparent;
+    background-color: transparent;
+    font-size: 15px;
+    z-index: 2;
+}
+.calendar-placeholder {
+    padding-right: 30px;
+    
+    height: fit-content;
+    font-family: Heebo, Alef-Regular, sans-serif;
+    font-size: 18.8px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: #ffffff;
+    background: transparent;
+    text-align: right;
+    border: transparent;
+    direction: rtl;
+    z-index: 2;
+}
+.arrow-open-date-mobile-picker {
+    width: 1px;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 9px solid rgba(255,255,255, 1);
+    position: absolute;
+    top: 44%;
+    border-radius: 2px;
+    left:0;
+    margin-left:40px;
+}
+user-input:focus {
+    border: solid 1px rgba(255, 255, 255, 1);
+}
+button:focus{
+    outline: none;
+}
+
+.table-calendar {
+    /*margin-top: 23px;*/
+    width: fit-content;
+
+    margin: 23px auto auto auto;
+}
+.arrow-open-date {
+    width: 1px;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 9px solid rgba(255,255,255, 0.7);
+    position: absolute;
+    top: 50%;
+    border-radius: 2px;
+
+    margin-left: 20px;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+.choose-month-wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-top:30px;
+    margin-bottom: 37px;
+}
+.arrow-clickable-area {
+    cursor: pointer;
+}
+.arrow-clickable-area:hover > .calendar-arrow  {
+    border: solid white;
+    border-width: 0 1.8px 1.8px 0;
+}
+.right-arrow-container {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 8px;
+    top: -4px;
+}
+.left-arrow-container {
+    position: absolute;
+    left: 8px;
+    top: -4px;
+    width: 30px;
+    height: 30px;
+}
+.choose-month {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15.4px;
+    letter-spacing: 0.5px;
+    width: fit-content;
+    margin: auto;
+    color: #a5a5a5;
+    font-weight: 500;
+}
+
+
+.calendar-arrow {
+    border: solid #a5a5a5;
+    border-width: 0 1.8px 1.8px 0;
+    display: inline-block;
+    padding: 3px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.right {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.left {
+    transform: translate(-50%, -50%) rotate(135deg);
+    -webkit-transform: translate(-50%, -50%) rotate(135deg);
+}
+.arrow-open-date-container {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-left: 20px;
+}
