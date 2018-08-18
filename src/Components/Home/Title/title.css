@@ -4,6 +4,7 @@
     flex-direction: column;
     text-align: center;
     margin: auto;
+    padding-top: 101px;
     /*height: 255px;*/
 }
 .header-title {

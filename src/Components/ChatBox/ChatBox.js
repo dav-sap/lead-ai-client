@@ -136,7 +136,8 @@ export default class ChatBox extends Component {
     };
 
     componentWillMount(){
-        if (!this.props.location.state || (!isMobile() && !this.props.location.state.name) || (isMobile() && !this.props.location.state.consultants)) {
+        // if (!this.props.location.state || (!isMobile() && !this.props.location.state.name) || (isMobile() && !this.props.location.state.consultants)) {
+        if (!this.props.location.state || !this.props.location.state.consultants) {
             this.props.history.push({pathname:'/'})
             this.setState({
                 redirect: true
@@ -146,15 +147,14 @@ export default class ChatBox extends Component {
         if (isMobile()) {
             this.bot = MOBILE_BOT;
         } else {
-            this.consultantChosen = this.props.location.state.name;
-            this.bot = WEB_BOT;
+            // this.consultantChosen = this.props.location.state.name;
+            this.bot = MOBILE_BOT;
         }
         this.setState({
             currentNode : this.bot.rootNode()
         })
     }
     componentDidMount() {
-        console.log("CLOSING");
         let tl = new TimelineMax();
         tl.to(CSSRulePlugin.getRule('body:before'), 0.25, {
             cssRule: {top: '0%'},

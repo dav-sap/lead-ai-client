@@ -71,10 +71,7 @@ let is_wed_date = {
     name: "",
     getName: true,
     get content() {
-        // let start = "נעים מאוד ";
         let name = " " + this.name.split(" ")[0] + " ";
-        // let end = ". יש כבר תאריך לחתונה?";
-        
         return (
             <span> נעים מאוד
             <span>{name}</span>
@@ -160,19 +157,15 @@ let end = {
     getConsultantName: true,
     consultantName: "",
     get content() {
-        let MAZAL_TOV = "מזל טוב ";
-        let name = this.name.split(" ")[0];
-        let EX = "! ";
-        let consultant = this.consultantName;
-        let END = " איתך קשר בקרוב";
+        let name = " " + this.name.split(" ")[0];
         return (
             <span>
-            <span>{MAZAL_TOV}</span>
+            <span>מזל טוב </span>
             <span>{name}</span>
             !
             <br/>
-            <span>{consultant}</span>
-            <span>{END}</span>
+            <span>{this.consultantName}</span>
+            <span> איתך קשר בקרוב</span>
             </span>
         )
     },
