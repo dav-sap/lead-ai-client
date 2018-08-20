@@ -43,14 +43,25 @@
     padding-bottom: 86px;
     direction: rtl;
 }
-@media only screen and (max-width: 815px) {
+@media only screen and (max-width: 900px) {
     .header-title {
-        font-size: 40px;
-        height: 80px;
         margin-bottom: 10px;
     }
     .header-sub-title {
+        padding-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 715px) {
+    .header-title {
+        font-size: 40px;
+        height: 80px;
+    }
+    .header-sub-title {
         font-size: 15px;
-        padding-bottom: 25px;
+    }
+}
+@media only screen and (max-height: 600px) {
+    .title {
+        padding-top: 30px;
     }
 }

@@ -6,16 +6,12 @@ const ANSWER_INPUT = "answer_input";
 const ANSWER_OPTION = "answer_option";
 const ANSWER_CALENDAR = "answer_calendar";
 const ANSWER_PIC_OPTIONS = "answer_pic_options";
-const FEMALE = "Female";
-const MALE = "Male";
 const NOT_YET_STR = "עוד לא";
 const YES_STR = "כן!";
-const END_STR = "מעולה! היועץ שלנו יצור איתך בקרוב.";
 const YOUR_NUM_STR_AFTER_DATE = <span>תאריך חלום! 😍 שאלה אחרונה.<br/> מה מספר הטלפון שלך?</span>
 const YOUR_NUM_STR_AFTER_NO_DATE = <span>אין לחץ 😉 שאלה אחרונה.<br/> מה מספר הטלפון שלך?</span>
 const WHEN_WED_QUESTION = "קולולו!!! מתי מתחתנים?";
 const GET_CONSULTANT = <span>המומחים הטובים ביותר בתחום <br/> צילום החתונות עומדים לרשותכם. <br/> בחרו את היועץ איתו תרצו להתכתב:</span>
-const END_YOUR_NUMBER_STR = <span>שאלה אחרונה.<br/>מה מספר הטלפון שלך?</span>
 
 
 let get_consultant = {
@@ -215,5 +211,5 @@ function getWebBot() {
 }
 const WEB_BOT = getWebBot();
 const MOBILE_BOT = getMobileBot();
-export {QUESTION, ANSWER_OPTION, ANSWER_INPUT, ANSWER_CALENDAR, MALE, NOT_YET_STR,YES_STR, MOBILE_BOT, WEB_BOT, WHEN_WED_QUESTION, ANSWER_PIC_OPTIONS}
+export {QUESTION, ANSWER_OPTION, ANSWER_INPUT, ANSWER_CALENDAR, NOT_YET_STR,YES_STR, MOBILE_BOT, WHEN_WED_QUESTION, ANSWER_PIC_OPTIONS}
 

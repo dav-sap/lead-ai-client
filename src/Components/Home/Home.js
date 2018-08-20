@@ -5,14 +5,12 @@ import Title from './Title/Title';
 import MobileTitle from './Mobile/Title';
 import MobileFooter from './Mobile/Footer';
 import $ from "jquery";
-import gsap from 'gsap'
+// import gsap from 'gsap'
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 import TimelineMax from 'gsap/TimelineMax';
 import {isMobile} from './../Utils'
 import Power2 from 'gsap'
 import mixpanel from 'mixpanel-browser'
-import Loader from './../ChatBox/Loader'
-import ConsultantsBody from "./ConsultantsBody/ConsultantsBody";
 
 
 export default class Home extends Component {
@@ -156,22 +154,10 @@ export default class Home extends Component {
                                 <div className="button-shadow"/>
                             </div>
                             <div className="images-wrapper">
-                                <picture>
-                                    <source srcSet="/images/man-1@2x.png" media="(min-width: 1400px) and (min-height: 1100px)"/>
-                                    <img className="img-man-first img-man" src="/images/man-1.png"/>
-                                </picture>
-                                <picture>
-                                    <source srcSet="/images/man-2@2x.png" media="(min-width: 1400px) and (min-height: 1100px)"/>
-                                    <img className="img-man-second img-man" src="/images/man-2.png"/>
-                                </picture>
-                                <picture>
-                                    <source srcSet="/images/man-3@2x.png" media="(min-width: 1400px) and (min-height: 1100px)"/>
-                                    <img className="img-man-third img-man" src="/images/man-3.png"/>
-                                </picture>
-                                <picture>
-                                    <source srcSet="/images/man-4@2x.png" media="(min-width: 1400px) and (min-height: 1100px)"/>
-                                    <img className="img-man-first img-man" src="/images/man-4.png"/>
-                                </picture>
+                                <img alt="man-1" className="img-man-first img-man" src="/images/man-1.png"/>
+                                <img alt="man-2" className="img-man-second img-man" src="/images/man-2.png"/>
+                                <img alt="man-3" className="img-man-third img-man" src="/images/man-3.png"/>
+                                <img alt="man-4" className="img-man-first img-man" src="/images/man-4.png"/>
                             </div>
                         </div>
                     }

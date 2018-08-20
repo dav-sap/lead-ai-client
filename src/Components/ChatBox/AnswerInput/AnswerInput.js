@@ -26,7 +26,7 @@ export default class AnswerInput extends Component {
                 inputText: this.props.answerNode.data().changeString(this.state.inputText, event.target.value)
             }, () => {
                 let el = document.getElementById("textbox");
-                if (typeof el.selectionStart == "number") {
+                if (typeof el.selectionStart === "number") {
                     el.selectionStart = el.selectionEnd = el.value.length;
                 } else if (typeof el.createTextRange !== "undefined") {
                     el.focus();

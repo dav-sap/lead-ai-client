@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {TITLES} from "../../Consts";
 import './footer.css'
 export default class MobileFooter extends Component {
 
@@ -12,6 +11,7 @@ export default class MobileFooter extends Component {
             console.error(err);
         }
     }
+
     render() {
         return (
             <div className="mobile-footer">
@@ -20,7 +20,7 @@ export default class MobileFooter extends Component {
                     <div className="next-button-text">
                         התחל ייעוץ בחינם
                     </div>
-                    <img className="arrow-next" src="/images/arrow_mobile.png"/>
+                    <img className="arrow-next" alt="next" src="/images/arrow_mobile.png"/>
                     </div>
                 </button>
             </div>

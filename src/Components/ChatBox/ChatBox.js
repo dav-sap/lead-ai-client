@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import "./chat-box.css"
 import "./send-loader.css"
 import "./loading-dots.css"
-// import TypeWriter from 'react-typewriter';
-import Confetti from 'react-confetti'
-// import BOT_LOGIC from './GraphBot';
 import {ERROR} from "../Consts";
-import {ANSWER_OPTION, ANSWER_INPUT, WEB_BOT, MOBILE_BOT, ANSWER_CALENDAR, ANSWER_PIC_OPTIONS} from './GraphBot';
+import {ANSWER_OPTION, ANSWER_INPUT, MOBILE_BOT, ANSWER_CALENDAR, ANSWER_PIC_OPTIONS} from './GraphBot';
 import MobileHeader from "../Home/Mobile/MobileHeader";
 import Typist from 'react-typist';
 import AnswerInput from "./AnswerInput/AnswerInput";
@@ -14,7 +11,7 @@ import AnswerOptions from "./AnswerOptions/AnswerOptions";
 import AnswerCalendar from "./AnswerCalendar/AnswerCalendar";
 import AnswerPicOptions from "./AnswerPicOptions";
 import $ from "jquery";
-import gsap from 'gsap'
+// import gsap from 'gsap'
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 import TimelineMax from 'gsap/TimelineMax';
 import Power2 from 'gsap'
@@ -181,11 +178,10 @@ export default class ChatBox extends Component {
             let audio = document.getElementById("audio-end");
             audio.play().then(() => {
                 console.log("Playing...")
-            }).
-            catch((err) => {
+            })
+            .catch((err) => {
                 console.error(err);
-            }) 
-            
+            })
         }
     };
     getAnswerStyle(answerNode) {
