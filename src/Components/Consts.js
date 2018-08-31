@@ -9,5 +9,12 @@ const TITLES = {
     MOBIE_MIDDLE:<div>כל הסודות שחשוב שתדעו לפני  <br/>שבוחרים צלם לחתונה.</div>,
     FREE_OF_CHARGE:<div>השירות ניתן ללא עלות.</div>,
 };
+
+const ANSWER_TYPES = {
+	INPUT: "input",
+	OPTIONS: "options",
+	RADIO_OPTIONS: "radio_options"
+}
+
 const ERROR = "אופס.. תקלה. נסו שוב בבקשה";
-export {TITLES, ERROR}
+export {TITLES, ERROR, ANSWER_TYPES}

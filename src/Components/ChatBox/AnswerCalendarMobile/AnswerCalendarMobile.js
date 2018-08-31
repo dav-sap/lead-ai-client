@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NextButton from "../NextButton/NextButton";
+import NextButton from "../../NextButton/NextButton";
 import {isFirefox} from './../../Utils'
 
 export default class AnswerCalendarMobile extends Component{

@@ -1,159 +1,170 @@
 .chat-box-wrapper {
-    overflow-y: auto;
-    height: 100%;
-    width: 100%;
+	overflow-y: auto;
+	height: 100%;
+	width: 100%;
 }
 .chat-box{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: auto;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: auto;
 
 }
 .loader-wrapper {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%);
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%);
 }
 
 textarea:focus {
-    outline:none;
+	outline:none;
 }
 
 .end-image-wrapper {
-    position: relative;
-    top: -23px;
-    cursor: pointer;
+	position: relative;
+	top: -23px;
+	cursor: pointer;
 }
 .end-img {
-    width: 84px;
-    height: 84px;
-    object-fit: contain;
+	width: 84px;
+	height: 84px;
+	object-fit: contain;
 }
 
 .answer-wrapper {
-    width: fit-content;
-    margin:65px auto auto auto;
-    padding-bottom: 15%;
-    position: relative;
-    transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out ;
+	width: fit-content;
+	margin:65px auto auto auto;
+	padding-bottom: 15%;
+	position: relative;
+	animation: answer-move 0.5s ease-in-out;
+}
+@keyframes answer-move {
+	from {
+		top: 10px;
+		opacity: 0;
+	}
+	to {
+		top: 0px;
+		opacity: 1;
+	}
 }
 .text-typer {
-    width: 100%;
-    position: relative;
+	width: 100%;
+	position: relative;
 }
 
 
 .glow-image-end {
-    width: 64px;
-    height: 64px;
-    opacity: 0.65;
-    -webkit-filter: blur(25.6px);
-    filter: blur(25.6px);
-    background-color: #dddddd;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+	width: 64px;
+	height: 64px;
+	opacity: 0.65;
+	-webkit-filter: blur(25.6px);
+	filter: blur(25.6px);
+	background-color: #dddddd;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
 }
 fieldset {
-    border: 0;
-    padding: 0;
+	border: 0;
+	padding: 0;
 }
 
 .Cursor {
-    background-color: #ffe500;
-    width: 13px;
-    padding-right: 7px;
-    margin-right: 10px;
-    color: transparent;
-    height: fit-content;
+	background-color: #ffe500;
+	width: 13px;
+	padding-right: 7px;
+	margin-right: 10px;
+	color: transparent;
+	height: fit-content;
 }
 .Cursor--blinking {
-    opacity: 1;
-    animation: blink 0.8s ease-in-out infinite;
-    -webkit-animation: 0.8s blink ease-in-out infinite;
-    -moz-animation: 0.8s blink ease-in-out infinite;
-    -o-animation: 0.8s blink ease-in-out infinite;
+	opacity: 1;
+	animation: blink 0.8s ease-in-out infinite;
+	-webkit-animation: 0.8s blink ease-in-out infinite;
+	-moz-animation: 0.8s blink ease-in-out infinite;
+	-o-animation: 0.8s blink ease-in-out infinite;
 }
 .error-msg {
-    width: 202px;
-    height: 14px;
-    font-family: Heebo, Alef-Regular, sans-serif;
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    text-align: center;
-    color: #ef4444;
-    direction: rtl;
-    margin: auto;
-    position: absolute;
-    top: -20px;
-    left: 30px;
+	width: 202px;
+	height: 14px;
+	font-family: Heebo, Alef-Regular, sans-serif;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 3px;
+	text-align: center;
+	color: #ef4444;
+	direction: rtl;
+	margin: auto;
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 
 .text-wrapper {
-    direction: rtl;
-    padding-top: 15%;
-    margin-right: auto;
-    margin-left: auto;
-    font-family: Alef-Regular, sans-serif;
-    font-size: 22px;
-    line-height: 1.32;
-    text-align: center;
-    color: #ffffff;
+	direction: rtl;
+	padding-top: 15%;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: Alef-Regular, sans-serif;
+	font-size: 22px;
+	line-height: 1.32;
+	text-align: center;
+	color: #ffffff;
 }
 textarea {
-    resize: none;
+	resize: none;
 }
 
 
 @media only screen and (max-width: 500px) {
-    .text-wrapper {
-        font-family: Alef-Regular, sans-serif;
-        font-size: 19px;
-        line-height: 1.45;
-        text-align: right;
-        margin-right: 34px;
-        margin-left: 34px;
-    }
-    .text-wrapper {
-        padding-top: 90px;
-        
-    }
+	.text-wrapper {
+		font-family: Alef-Regular, sans-serif;
+		font-size: 19px;
+		line-height: 1.45;
+		text-align: right;
+		margin-right: 34px;
+		margin-left: 34px;
+	}
+	.text-wrapper {
+		padding-top: 90px;
+		
+	}
 }
 
 @media only screen and (max-height: 530px) {
-    .text-wrapper {
-        font-family: Alef-Regular, sans-serif;
-        font-size: 19px;
-        line-height: 1.45;
-        margin-right: 34px;
-        margin-left: 34px;
-        padding-top: 65px;
-        
-    }
-    .answer-wrapper {
-        padding-bottom: 65px;
-    }
+	.text-wrapper {
+		font-family: Alef-Regular, sans-serif;
+		font-size: 19px;
+		line-height: 1.45;
+		margin-right: 34px;
+		margin-left: 34px;
+		padding-top: 65px;
+		
+	}
+	.answer-wrapper {
+		padding-bottom: 65px;
+	}
 }
 
 .pics-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 
 input{
-    outline:none;
+	outline:none;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
 
-    /* color: rgba(0, 0, 0, 0); */
-    opacity: 0;
-    visibility: hidden;
+	/* color: rgba(0, 0, 0, 0); */
+	opacity: 0;
+	visibility: hidden;
 }

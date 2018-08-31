@@ -1,3 +1,8 @@
+import TimelineMax from "gsap/TimelineMax";
+import CSSRulePlugin from "gsap/CSSRulePlugin";
+import Power2 from "gsap";
+import $ from "jquery";
+
 function isMobile() {
     window.mobilecheck = function() {
         let check = false;
@@ -22,4 +27,58 @@ function isFirefox()  {
 // function isSafari(){
 //     return /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 // }
-export {isMobile, isChrome, isFirefox}
+
+function openScreen() {
+	let tl = new TimelineMax();
+	tl.to(CSSRulePlugin.getRule('body:before'), 0.25, {
+		cssRule: {top: '0%'},
+		ease: Power2.easeOut}, '+=1.0', 'open')
+		.to(CSSRulePlugin.getRule('body:after'), 0.25, {
+			cssRule: {bottom: '0%'},
+			ease: Power2.easeOut
+		}, '-=0.25', 'open')
+		.to($('.between-loader'), 0.25, {opacity: 0, zIndex: 0}, '-=0.25');
+}
+
+function openScreenNoAnimation() {
+	let loader = document.getElementsByClassName("between-loader")[0];
+	let tl = new TimelineMax();
+	tl.to(CSSRulePlugin.getRule('body:before'), 0.0, {
+		cssRule: {top: '0%'},
+		ease: Power2.easeOut}, '0.0', 'open')
+		.to(CSSRulePlugin.getRule('body:after'), 0.0, {
+			cssRule: {bottom: '0%'},
+			ease: Power2.easeOut
+		}, '0.0', 'open')
+		.to(loader, 0.0, {opacity: 0, zIndex: 0}, '0.3');
+}
+
+function closeScreen() {
+	let loader = document.getElementsByClassName("between-loader")[0];
+	let tl = new TimelineMax();
+	tl.to(CSSRulePlugin.getRule('body:before'), 0.25, {
+		cssRule: {top: '50%'},
+		ease: Power2.easeOut}, 'close')
+		.to(CSSRulePlugin.getRule('body:after'), 0.25, {
+			cssRule: {bottom: '50%'},
+			ease: Power2.easeOut
+		}, 'close')
+		.to(loader, 0.25, {opacity: 1, zIndex: 500})
+}
+
+const INPUT_HELPER_FUNCTIONS = {
+	name: {
+		changeString: function (oldInput, newInput) {
+			return newInput.replace(/[0-9./-]/g, "").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\n]/gi, '');
+		},
+		validator: function (value) {
+			// let regex = RegExp("/^[a-z\u0590-\u05fe]+$/i");
+			return value.length <= 15 //&& regex.test(value);
+		},
+		validateSubmit: function (value) {
+			return value.length >= 1
+		}
+	}
+}
+
+export {isMobile, isChrome, isFirefox, openScreen, closeScreen, openScreenNoAnimation, INPUT_HELPER_FUNCTIONS}

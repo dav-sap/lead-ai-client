@@ -4,10 +4,13 @@ var dataTree = require('data-tree');
 const QUESTION = "question";
 const ANSWER_INPUT = "answer_input";
 const ANSWER_OPTION = "answer_option";
+const ANSWER_RADIO_OPTIONS = "answer_radio_options";
 const ANSWER_CALENDAR = "answer_calendar";
 const ANSWER_PIC_OPTIONS = "answer_pic_options";
 const NOT_YET_STR = "עוד לא";
 const YES_STR = "כן!";
+const IS_BUDGET = "האם יש תקציב?";
+const BUDGET = "מה התקציב שלך?";
 const YOUR_NUM_STR_AFTER_DATE = <span>תאריך חלום! 😍 שאלה אחרונה.<br/> מה מספר הטלפון שלך?</span>
 const YOUR_NUM_STR_AFTER_NO_DATE = <span>אין לחץ 😉 שאלה אחרונה.<br/> מה מספר הטלפון שלך?</span>
 const WHEN_WED_QUESTION = "קולולו!!! מתי מתחתנים?";
@@ -62,7 +65,7 @@ let get_name_input = {
 };
 
 
-let is_wed_date = {
+let is_budget = {
     type: QUESTION,
     name: "",
     getName: true,
@@ -71,15 +74,34 @@ let is_wed_date = {
         return (
             <span> נעים מאוד
             <span>{name}</span>
-            💐
+            🚐
             <br/>
-            יש כבר תאריך לחתונה?
+                {IS_BUDGET}
             </span>
         )
     }
 }
 
-let is_wed_date_no = {
+let get_budget = {
+	type: QUESTION,
+	get content() {
+		return (
+			<span>
+				{BUDGET}
+            </span>
+		)
+	}
+}
+
+let budget_options = {
+	type: ANSWER_RADIO_OPTIONS,
+    options: ["60k-100k", "100k-120k", "120k-150k", "150k או יותר"],
+	validateSubmit: function (value) {
+		return value !== null
+	}
+};
+
+let no_option = {
     type: ANSWER_OPTION,
     content:NOT_YET_STR,
     validateSubmit: function (value) {
@@ -87,7 +109,7 @@ let is_wed_date_no = {
     }
 };
 
-let is_wed_date_yes = {
+let yes_option = {
     type: ANSWER_OPTION,
     content: YES_STR,
     validateSubmit: function (value) {
@@ -169,47 +191,30 @@ let end = {
 };
 function getMobileBot() {
     let mobileBot = dataTree.create();
-    let get_consultant_node = mobileBot.insert(get_consultant);
-    let get_consultant_options_node = mobileBot.insertToNode(get_consultant_node, get_consultant_options);
-    let hello_get_name_node_mobile = mobileBot.insertToNode(get_consultant_options_node, hello_get_name);
-    let get_name_input_node_mobile = mobileBot.insertToNode(hello_get_name_node_mobile, get_name_input);
-    let is_wed_date_node_mobile = mobileBot.insertToNode(get_name_input_node_mobile, is_wed_date);
-    let is_wed_date_no_node_mobile = mobileBot.insertToNode(is_wed_date_node_mobile, is_wed_date_no);
-    let is_wed_date_yes_node_mobile = mobileBot.insertToNode(is_wed_date_node_mobile, is_wed_date_yes);
-    let get_wed_date_node_mobile = mobileBot.insertToNode(is_wed_date_yes_node_mobile, get_wed_date);
-    let get_wed_date_input_node_mobile = mobileBot.insertToNode(get_wed_date_node_mobile, get_wed_date_input );
-    let get_cell_num_with_date_node_mobile = mobileBot.insertToNode(get_wed_date_input_node_mobile, get_cell_num_with_date);
+    let get_name_node = mobileBot.insert(hello_get_name);
+    // let get_consultant_options_node = mobileBot.insertToNode(get_consultant_node, get_consultant_options);
+    // let hello_get_name_node_mobile = mobileBot.insertToNode(get_consultant_node, hello_get_name);
+    let get_name_input_node_mobile = mobileBot.insertToNode(get_name_node, get_name_input);
+    let is_budget_node_mobile = mobileBot.insertToNode(get_name_input_node_mobile, is_budget);
+
+    let budget_node_mobile = mobileBot.insertToNode(is_budget_node_mobile, yes_option);
+    let get_budget_node_mobile = mobileBot.insertToNode(budget_node_mobile, get_budget);
+    let budget_options_node_mobile = mobileBot.insertToNode(get_budget_node_mobile, budget_options);
+
+	let no_budget_node_mobile = mobileBot.insertToNode(is_budget_node_mobile, no_option);
+    let get_cell_num_with_date_node_mobile = mobileBot.insertToNode(no_budget_node_mobile, get_cell_num_with_date);
     let get_cell_num_input_node_mobile_1 = mobileBot.insertToNode(get_cell_num_with_date_node_mobile, get_cell_num_input);
     mobileBot.insertToNode(get_cell_num_input_node_mobile_1, end );
 
 
 
-    let get_cell_num_no_date_node_mobile = mobileBot.insertToNode(is_wed_date_no_node_mobile, get_cell_num_no_date);
-    let get_cell_num_input_node_mobile_2 = mobileBot.insertToNode(get_cell_num_no_date_node_mobile, get_cell_num_input);
-    mobileBot.insertToNode(get_cell_num_input_node_mobile_2, end);
+    // let get_cell_num_no_date_node_mobile = mobileBot.insertToNode(is_wed_date_no_node_mobile, get_cell_num_no_date);
+    // let get_cell_num_input_node_mobile_2 = mobileBot.insertToNode(get_cell_num_no_date_node_mobile, get_cell_num_input);
+    // mobileBot.insertToNode(get_cell_num_input_node_mobile_2, end);
     return mobileBot
 }
-function getWebBot() {
-    let webBot = dataTree.create();
-    let hello_get_name_node_mobile = webBot.insert(hello_get_name);
-    let get_name_input_node_mobile = webBot.insertToNode(hello_get_name_node_mobile, get_name_input);
-    let is_wed_date_node_mobile = webBot.insertToNode(get_name_input_node_mobile, is_wed_date);
-    let is_wed_date_no_node_mobile = webBot.insertToNode(is_wed_date_node_mobile, is_wed_date_no);
-    let is_wed_date_yes_node_mobile = webBot.insertToNode(is_wed_date_node_mobile, is_wed_date_yes);
-    let get_wed_date_node_mobile = webBot.insertToNode(is_wed_date_yes_node_mobile, get_wed_date);
-    let get_wed_date_input_node_mobile = webBot.insertToNode(get_wed_date_node_mobile, get_wed_date_input );
-    let get_cell_num_with_date_node_mobile = webBot.insertToNode(get_wed_date_input_node_mobile, get_cell_num_with_date);
-    let get_cell_num_input_node_mobile_1 = webBot.insertToNode(get_cell_num_with_date_node_mobile, get_cell_num_input);
-    webBot.insertToNode(get_cell_num_input_node_mobile_1, end );
 
-
-
-    let get_cell_num_no_date_node_mobile = webBot.insertToNode(is_wed_date_no_node_mobile, get_cell_num_no_date);
-    let get_cell_num_input_node_mobile_2 = webBot.insertToNode(get_cell_num_no_date_node_mobile, get_cell_num_input);
-    webBot.insertToNode(get_cell_num_input_node_mobile_2, end);
-    return webBot
-}
-const WEB_BOT = getWebBot();
 const MOBILE_BOT = getMobileBot();
-export {QUESTION, ANSWER_OPTION, ANSWER_INPUT, ANSWER_CALENDAR, NOT_YET_STR,YES_STR, MOBILE_BOT, WHEN_WED_QUESTION, ANSWER_PIC_OPTIONS}
+export {QUESTION, ANSWER_OPTION, ANSWER_INPUT, ANSWER_CALENDAR, ANSWER_RADIO_OPTIONS,
+    NOT_YET_STR,YES_STR, MOBILE_BOT, WHEN_WED_QUESTION, ANSWER_PIC_OPTIONS}
 

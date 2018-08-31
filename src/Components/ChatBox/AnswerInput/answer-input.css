@@ -45,7 +45,7 @@ user-input:-ms-input-placeholder { /* Microsoft Edge */
     border: solid 1px rgba(255, 255, 255, 1);
 }
 .input-wrapper {
-    width: fit-content;
     margin-right: auto;
     margin-left: auto;
+    position: relative;
 }

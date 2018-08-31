@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './answer-calendar.css'
-import NextButton from "../NextButton/NextButton";
+import NextButton from "../../NextButton/NextButton";
+import Loader from "../Loader";
 const dateStateStr = "בחר תאריך";
 
 export default class AnswerCalendar extends Component {
@@ -9,16 +10,32 @@ export default class AnswerCalendar extends Component {
         currentDateShowing: new Date(),
         dateStr: dateStateStr,
         calendarVisible: false,
+        sendLoading: false,
     };
     prevChosenDate = null;
-    changeMonth = (increment) => {
 
+    changeMonth = (increment) => {
         let copyDate = new Date(this.state.currentDateShowing);
         copyDate.setMonth(this.state.currentDateShowing.getMonth() + increment);
         this.setState({
             currentDateShowing: copyDate,
         })
     }
+
+	handleSubmit = () => {
+		try {
+			let audio = document.getElementById("audio-next");
+			audio.play();
+			this.props.disableError();
+			if (this.state.dateStr !== "") {
+				this.setState({sendLoading: true});
+                this.props.addDataToDB(this.props.currentNode.data().content, this.state.dateStr, this.props.currentNode.childNodes()[0].childNodes()[0]);
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
     chooseDate = (day) => {
         let copyDate = new Date(this.state.currentDateShowing);
         copyDate.setDate(day);
@@ -83,9 +100,7 @@ export default class AnswerCalendar extends Component {
                 </div> :
 
                 this.isValidInput() ?
-
-                    <NextButton currentNode={this.props.currentNode} nextButton={true} content={"הבא"} loc="25px" disableError={this.props.disableError} error={this.props.error}
-                                answerNode={this.props.answerNode} createUser={this.props.createUser} addDataToDB={this.props.addDataToDB}/>
+                    !this.state.sendLoading ? <NextButton width={203} text={"הבא"} onClick={this.handleSubmit}/> : <Loader/>
                  : ""}
             </div>
         )

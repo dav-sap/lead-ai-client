@@ -15,16 +15,16 @@
     font-family: Heebo, Alef-Regular, sans-serif;
     font-size: 18.8px;
     text-align: center;
-    height: 50px;
+    height: 50.5px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 17px;
     color: #ffffff;
     z-index: 2;
     position: absolute;
-    top: 2px;
+    top: 1.8px;
     right: 2px;
-
+    /*background: linear-gradient(#1a182a, #1a182a), linear-gradient(to right, #02c0fd, #fecf03 53%, #fd504f);*/
 }
 .button-text {
     /*position: absolute;*/
@@ -36,13 +36,6 @@
     direction: rtl;
     margin: auto;
 }
-/*.submit-button:hover:enabled  > svg g:hover text{*/
-    /*display: block;*/
-    /*fill: #022b56;*/
-/*}*/
-/*.submit-button:hover:enabled  > svg g:hover  rect{*/
-    /*fill: rgba(255, 255, 255, 0.9);*/
-/*}*/
 .submit-button:hover:enabled{
     background: rgba(255, 255, 255, 0.9);
     color: #022b56;
@@ -62,4 +55,28 @@ button:focus {outline:0;}
 .input-button-wrapper {
     position: relative;
     margin-top: 5px;
+}
+.home-start-button-wrapper {
+    height: 55px;
+    margin-right: 5px;
+    margin-left: 5px;
+    position: relative;
+}
+.lone-button {
+    margin: auto;
+}
+
+.button-shadow {
+    /*width: calc(100% - 20px);*/
+    /*height: 50%;*/
+    /*position: relative;*/
+    /*top: 35%;*/
+    /*margin: auto;*/
+    /*border-radius: 19.4px;*/
+    /*-webkit-filter: blur(5px);*/
+    /*filter: blur(5px);*/
+    /*border: solid 2.2px transparent;*/
+    /*background-image: linear-gradient(92deg, #c6e6ff, #94c8ff), linear-gradient(to right, #02c0fd, #fecf03 53%, #fd504f);*/
+    /*background-origin: border-box;*/
+    /*background-clip: content-box, border-box;*/
 }

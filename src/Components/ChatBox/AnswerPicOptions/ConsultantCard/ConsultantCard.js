@@ -9,7 +9,7 @@ export default class ConsultantCard extends Component {
     render() {
         return (
 
-            <div className="consultant-card" onClick={ () => {setTimeout( () => this.props.closeScreen(false, this.props.info), 40);}}>
+            <div className="consultant-card" onClick={ () => {setTimeout( () => this.props.onClick(this.props.info), 40);}}>
                 {this.props.info.imgPath ?
                     <div className="consultant-img-wrapper"  style={{top: this.state.hover ? "-5px" : "0"}}>
                     <img className="consultant-img" alt="Consultant" onMouseEnter={() => this.setState({hover:true})} onMouseLeave={() => this.setState({hover:false})}

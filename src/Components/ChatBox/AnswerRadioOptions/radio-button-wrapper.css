@@ -1,0 +1,12 @@
+.radio-button-wrapper {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	margin-bottom:20px;
+}
+
+@media only screen and (max-width: 650px) {
+	.radio-button-wrapper {
+		display: grid;
+		grid-template-columns: 100%;
+	}
+}
