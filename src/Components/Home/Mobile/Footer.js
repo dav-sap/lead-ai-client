@@ -6,7 +6,7 @@ export default class MobileFooter extends Component {
         try {
             let audio = document.getElementById("audio-next");
             audio.play();
-            this.props.closeScreen(true);
+            this.props.startChat();
         } catch (err) {
             console.error(err);
         }
@@ -15,9 +15,9 @@ export default class MobileFooter extends Component {
     render() {
         return (
             <div className="mobile-footer">
-                <button className="next-button" onClick={this.nextClicked}>
-                    <div className="next-button-wrapper">
-                    <div className="next-button-text">
+                <button className="start-chat-button" onClick={this.nextClicked}>
+                    <div className="start-chat-button-wrapper">
+                    <div className="start-chat-button-text">
                         התחל ייעוץ בחינם
                     </div>
                     <img className="arrow-next" alt="next" src="/images/arrow_mobile.png"/>

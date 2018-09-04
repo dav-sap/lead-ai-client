@@ -13,7 +13,8 @@ const TITLES = {
 const ANSWER_TYPES = {
 	INPUT: "input",
 	OPTIONS: "options",
-	RADIO_OPTIONS: "radio_options"
+	RADIO_OPTIONS: "radio_options",
+	COMPLETED: "completed"
 }
 
 const ERROR = "אופס.. תקלה. נסו שוב בבקשה";

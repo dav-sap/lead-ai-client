@@ -8,13 +8,8 @@ export default class AnswerOptions extends Component {
         sendLoading: false,
     };
     answerClicked = (answer) => {
-        // console.log(answer);
         this.setState({sendLoading: true});
 		this.props.onSubmit(answer)
-        // let nextNode = this.props.bot.traverser().searchBFS(function(data){
-        //     return data.content === answer;
-        // });
-        // this.props.addDataToDB(this.props.currentNode.data().content, answer, nextNode.childNodes()[0]);
     };
 
 	static getDerivedStateFromProps(nextProps, prevState) {
@@ -32,7 +27,7 @@ export default class AnswerOptions extends Component {
                 {!this.state.sendLoading ?
                     <div className="answer-options-wrapper">
 						{this.props.answer.options.map(option =>
-							<NextButton width={160} text={option.value} key={option.key}
+							<NextButton width={130} text={option.value} key={option.key}
 									   onClick={() => this.answerClicked(option)}/>
 						)}
                     </div>

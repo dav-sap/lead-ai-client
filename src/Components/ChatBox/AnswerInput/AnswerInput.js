@@ -71,7 +71,6 @@ export default class AnswerInput extends PureComponent {
 	}
 
     render() {
-    	console.log(this.helperFunctions.validateSubmit(this.state.inputText));
         return <div className="input-wrapper" >
             <fieldset style={{position: "relative", marginBottom: "25px"}}>
 

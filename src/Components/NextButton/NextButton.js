@@ -2,10 +2,10 @@ import React from 'react';
 import './next-button.css'
 
 const NextButton = (props) => {
-	console.log(props);
 	return (
-		<div className={"home-start-button-wrapper " + (props.buttonClass)} style={{width: props.width, opacity: props.disabled ? 0.5 : 1}}>
-			<button className="submit-button no-select" onClick={ props.disabled ? null : props.onClick}
+		<div className={"next-button-wrapper " + (props.buttonClass) + (props.disabled ? " next-button-disabled" : "")} style={{width: props.width}}>
+			<button className="submit-button no-select" onClick={props.onClick}
+					disabled={props.disabled}
 					style={{cursor: props.disabled ? "not-allowed" : "pointer", width: (props.width - 2).toString() + ".2px"}}>
 				<div className="button-text">
 					{props.text}

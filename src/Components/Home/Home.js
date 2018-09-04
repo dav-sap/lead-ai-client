@@ -5,11 +5,7 @@ import Title from './Title/Title';
 import MobileTitle from './Mobile/Title';
 import MobileFooter from './Mobile/Footer';
 import $ from "jquery";
-// import gsap from 'gsap'
-import CSSRulePlugin from "gsap/CSSRulePlugin";
-import TimelineMax from 'gsap/TimelineMax';
-import {closeScreen, isMobile, openScreen} from './../Utils'
-import Power2 from 'gsap'
+import {closeScreen, isMobile} from './../Utils'
 import mixpanel from 'mixpanel-browser'
 import NextButton from '../NextButton/NextButton'
 import {openScreenNoAnimation} from "../Utils";
@@ -29,31 +25,8 @@ export default class Home extends Component {
     }
 
     state = {
-        // consultants: [],
         error: false,
     }
-
-    // fetchConsultants = async () => {
-    //     try {
-    //         let response = await fetch("/consultants/get_consultants")
-    //
-    //         if (response.status !== 200) {
-    //             console.log(` Status Code: ${response.status}
-    //                     Error Getting consultant. Error: ${(response.error ? response.error : "")}`);
-    //             this.error = "Error Retrieving Data";
-    //             this.showError();
-    //
-    //         } else {
-    //             let resJson = await response.json();
-    //             this.error = resJson.length > 0 ? "" : "No Results";
-    //             console.log(resJson);
-    //             this.setState({consultants: resJson});
-    //         }
-    //     } catch (err) {
-    //             this.setState({error: true});
-    //             console.log('Fetch Error :-S', err);
-    //     }
-    // };
 
     showError = () => {
         this.setState({error: true});
@@ -70,18 +43,20 @@ export default class Home extends Component {
 				mixpanel.track("Moved to 2nd Screen WEB");
 			}
             closeScreen();
+			setTimeout(async () => {
+				let res = await fetch("/start_chat", {method: "POST"});
+				if (res.status === 200) {
+					let resJson = await res.json();
+					this.props.history.push({
+						pathname: '/chat',
+						state: {firstStage: resJson}
+					})
+				} else {
+					openScreenNoAnimation();
+					this.showError();
+				}
+			}, 500)
 
-			let res = await fetch("/start_chat", {method: "POST"});
-			if (res.status === 200) {
-				let resJson = await res.json();
-				this.props.history.push({
-					pathname: '/chat',
-					state: {firstStage: resJson}
-				})
-			} else {
-				openScreenNoAnimation();
-			    this.showError();
-            }
 		} catch (e) {
             console.error(e);
 			openScreenNoAnimation();
@@ -95,7 +70,7 @@ export default class Home extends Component {
 				{isMobile() ?
 					<div className="home-mobile">
 						<MobileTitle/>
-						<MobileFooter closeScreen={this.closeScreen}/>
+						<MobileFooter startChat={this.startChat}/>
 					</div> :
 					<div className="home-web-wrapper">
 						<Title/>

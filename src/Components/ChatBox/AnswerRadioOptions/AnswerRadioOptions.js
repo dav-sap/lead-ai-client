@@ -20,7 +20,7 @@ export default class AnswerRadioOptions extends Component {
 		try {
 			let audio = document.getElementById("audio-next");
 			audio.play();
-			if (this.state.chosen !== "") {
+			if (this.state.chosen) {
 				this.setState({sendLoading: true});
 				this.props.onSubmit(this.state.chosen);
 			}
@@ -36,17 +36,18 @@ export default class AnswerRadioOptions extends Component {
 				sendLoading: false
 			}
 		}
+		return null;
 	}
 
 	render() {
 		return (
 			<div>
 				<div className="radio-button-wrapper">
-					{this.props.answer.options.map(option => {
-						return <RadioButton key={option} value={option} chosen={this.state.chosen} onClick={this.buttonClicked}/>
+					{this.props.answer.options.map((option, index) => {
+						return <RadioButton key={index} value={option} chosen={this.state.chosen} onClick={this.buttonClicked}/>
 					})}
 				</div>
-				{!this.state.sendLoading ? <NextButton width={203} text={"הבא"} onClick={this.handleSubmit} buttonClass="lone-button"/>  : <Loader/> }
+				{!this.state.sendLoading ? <NextButton width={203} text={"הבא"} disabled={!this.state.chosen} onClick={this.handleSubmit} buttonClass="lone-button"/>  : <Loader/> }
 			</div>
 		)
 	}

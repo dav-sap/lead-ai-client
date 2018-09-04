@@ -78,7 +78,37 @@ const INPUT_HELPER_FUNCTIONS = {
 		validateSubmit: function (value) {
 			return value.length >= 1
 		}
+	},
+	phone: {
+		changeString: function (oldInput, newInput) {
+			let retInput = newInput;
+
+			if (oldInput.length === 4 && newInput.length === 3) {
+				retInput = newInput.slice(0, -1);
+			}
+			if (retInput.length >= 3) {
+				retInput = retInput.replace("-","").replace(/[^0-9./-]/g, "");
+				return retInput.slice(0, 3) + "-" + retInput.slice(3);
+			}
+			return retInput.replace(/[^0-9./-]/g, "");
+		},
+		validator: function (value) {
+			return value !== undefined && value !== null && value.length <= 11;
+		},
+		validateSubmit: function (value) {
+			return value && value.length === 11
+		}
 	}
 }
 
-export {isMobile, isChrome, isFirefox, openScreen, closeScreen, openScreenNoAnimation, INPUT_HELPER_FUNCTIONS}
+function getTimePassed(startTime, seconds) {
+
+	let endTime = new Date();
+
+	let timeDiff = endTime - startTime; //in ms
+	// strip the ms
+	timeDiff /= 1000;
+	console.log("time left, ", (seconds - timeDiff));
+	return (seconds - timeDiff) * 1000;
+}
+export {isMobile, isChrome, isFirefox, openScreen, closeScreen, openScreenNoAnimation, getTimePassed, INPUT_HELPER_FUNCTIONS}
