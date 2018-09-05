@@ -10,6 +10,8 @@ import AnswerOptions from "./AnswerOptions/AnswerOptions"
 import AnswerRadioOptions from "./AnswerRadioOptions/AnswerRadioOptions"
 import { getTimePassed, isMobile, openScreen} from "../Utils";
 import CompletionStage from "./CompletionStage/CompletionStage";
+import AnswerMultipleOptions from "./AnswerMultipleOptions/AnswerMultipleOptions";
+import LastQuestionStage from "./LastQuestionStage/LastQuestionStage";
 
 
 export default class ChatBox extends PureComponent {
@@ -44,6 +46,8 @@ export default class ChatBox extends PureComponent {
 
     submitUserInput = async (answer) => {
         try {
+			let audio = document.getElementById("audio-next");
+			audio.play();
         	if (!answer) {
 				this.setState({error: true});
         		return;
@@ -66,11 +70,19 @@ export default class ChatBox extends PureComponent {
 				}
 
                 setTimeout(() => {
-					this.setState({
-						stage: resJson.stage,
-						showAnswers: false,
-						questionNumber: this.state.questionNumber + 1,
-					})
+                	if (resJson.stage.lastQuestion) {
+						this.setState({
+							stage: resJson.stage,
+							showAnswers: true,
+							hideTyper: true
+						})
+					} else {
+						this.setState({
+							stage: resJson.stage,
+							showAnswers: false,
+							questionNumber: this.state.questionNumber + 1,
+						})
+					}
 				}, getTimePassed(startTime, 2))
 
             } else {
@@ -91,9 +103,23 @@ export default class ChatBox extends PureComponent {
         this.setState({showAnswers:true});
     };
 
+	completedAnalysis = () => {
+		let stage = JSON.parse(JSON.stringify(this.state.stage));
+		stage.lastQuestion = false;
+    	this.setState({
+			hideTyper: false,
+			showAnswers: false,
+			questionNumber: this.state.questionNumber + 1,
+			stage: stage
+		})
+	}
+
 	getComponentToRender = () => {
 		if (!this.state.stage || !this.state.stage.answer) {
 			return ""
+		}
+		if (this.state.stage.lastQuestion) {
+			return <LastQuestionStage completedAnalysis={this.completedAnalysis}/>;
 		}
 		switch (this.state.stage.answer.type) {
 			case ANSWER_TYPES.INPUT:
@@ -102,8 +128,12 @@ export default class ChatBox extends PureComponent {
 				return <AnswerOptions onSubmit={this.submitUserInput} answer={this.state.stage.answer} error={this.state.error}/>
 			case ANSWER_TYPES.RADIO_OPTIONS:
 				return <AnswerRadioOptions onSubmit={this.submitUserInput} answer={this.state.stage.answer} error={this.state.error}/>
+			case ANSWER_TYPES.MULTIPLE_OPTIONS:
+				return <AnswerMultipleOptions onSubmit={this.submitUserInput} answer={this.state.stage.answer} error={this.state.error}/>
 			case ANSWER_TYPES.COMPLETED:
 				return <CompletionStage/>
+			default:
+				return "";
 
 		}
 	}
@@ -138,11 +168,14 @@ export default class ChatBox extends PureComponent {
                 <div className="chat-box">
                     {isMobile() ? <MobileHeader/> : ""}
 					<div className="text-wrapper">
-						<Typist key={this.state.questionNumber} avgTypingDelay={35} stdTypingDelay={0} className="text-typer" startDelay={1500} onTypingDone={this.onFinishType} >
-							<span>
-								{this.state.questionToShow}
-							</span>
-						</Typist>
+						{this.state.hideTyper ? "" :
+							<Typist key={this.state.questionNumber} avgTypingDelay={35} stdTypingDelay={0}
+									className="text-typer" startDelay={1500} onTypingDone={this.onFinishType}>
+								<span>
+									{this.state.questionToShow}
+								</span>
+							</Typist>
+						}
 					</div>
 					{this.state.showAnswers ?
 						<div className="answer-wrapper">

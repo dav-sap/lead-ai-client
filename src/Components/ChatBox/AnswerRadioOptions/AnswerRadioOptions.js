@@ -18,8 +18,6 @@ export default class AnswerRadioOptions extends Component {
 
 	handleSubmit = () => {
 		try {
-			let audio = document.getElementById("audio-next");
-			audio.play();
 			if (this.state.chosen) {
 				this.setState({sendLoading: true});
 				this.props.onSubmit(this.state.chosen);

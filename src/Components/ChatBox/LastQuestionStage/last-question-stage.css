@@ -1,0 +1,54 @@
+.last-question-wrapper {
+	position: relative;
+	direction: rtl;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: Alef-Regular, sans-serif;
+	font-size: 22px;
+	line-height: 1.32;
+	text-align: center;
+	color: #ffffff;
+	width: 370px;
+	top: -92px;
+	/*were original text is usually written*/
+}
+.progress-bar {
+
+	height: 0px;
+	border-style: solid;
+	border-width: 1px;
+	border-image-source: linear-gradient(to right, #3023ae, #53a0fd 48%, #b4ec51);
+	border-image-slice: 1;
+	position: absolute;
+	animation: movingOpacity infinite 2.7s ease-in-out;
+
+}
+.progress-bar-percent {
+	margin-top: 50px;
+	margin-bottom: 15px;
+}
+/*.progress-bar-cover {*/
+	/*width: 0px;*/
+	/*height: 0px;*/
+	/*border: solid 1px black;*/
+	/*width: 370px;*/
+	/*opacity: 0.7;*/
+	/*position: absolute;*/
+/*}*/
+
+@keyframes movingOpacity {
+	0% {
+		width: 0px;
+	}
+	100% {
+		width: 370px;
+	}
+}
+@keyframes fading {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

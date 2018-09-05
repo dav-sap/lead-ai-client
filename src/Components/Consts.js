@@ -14,7 +14,8 @@ const ANSWER_TYPES = {
 	INPUT: "input",
 	OPTIONS: "options",
 	RADIO_OPTIONS: "radio_options",
-	COMPLETED: "completed"
+	COMPLETED: "completed",
+	MULTIPLE_OPTIONS: "multiple_options"
 }
 
 const ERROR = "אופס.. תקלה. נסו שוב בבקשה";

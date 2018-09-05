@@ -29,10 +29,6 @@ export default class AnswerInput extends PureComponent {
 
 	handleSubmit = () => {
 		try {
-			let audio = document.getElementById("audio-next");
-			audio.play();
-			// this.props.disableError();
-
 			if (this.state.inputText !== "") {
 				this.setState({sendLoading: true});
 				this.props.onSubmit(this.state.inputText);
