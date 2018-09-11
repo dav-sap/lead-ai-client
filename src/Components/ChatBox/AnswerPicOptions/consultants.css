@@ -9,7 +9,7 @@
 .consultant-title {
     width: fit-content;
     height: fit-content;
-    font-family: 'Heebo', Alef-Regular, sans-serif;
+    font-family: 'Heebo', 'Alef', sans-serif;
     font-size: 19.2px;
     font-weight: normal;
     font-style: normal;
@@ -32,7 +32,7 @@
     margin-right: 17px;
 }
 .consultant-name {
-    font-family: Alef-Regular, sans-serif;
+    font-family: 'Alef', sans-serif;
     font-size: 19.2px;
     font-weight: normal;
     font-style: normal;
@@ -144,7 +144,7 @@
         margin-left: 12px;
     }
     .consultant-name {
-        font-family: Alef-Regular, Alef-Bold, sans-serif;
+        font-family: 'Alef', Alef-Bold, sans-serif;
         font-size: 16.6px;
         letter-spacing: 0.4px;
         text-align: right;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../ChatBox/AnswerPicOptions/consultants.css'
-import ConsultantCard from "../../ChatBox/AnswerPicOptions/ConsultantCard/ConsultantCard";
+import ConsultantCard from "../../ChatBox/ConsultantCard/ConsultantCard";
 import {TITLES} from "../../Consts";
 
 export default class ConsultantsBody extends Component {

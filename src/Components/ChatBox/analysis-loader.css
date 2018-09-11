@@ -1,0 +1,46 @@
+@keyframes rotate {
+	from {
+		-moz-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+.analysis-loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-moz-transition: opacity 0.4s;
+	-o-transition: opacity 0.4s;
+	-webkit-transition: opacity 0.4s;
+	transition: opacity 0.4s;
+}
+
+.analysis-loader svg {
+	-moz-animation: rotate 2s infinite linear;
+	-webkit-animation: rotate 2s infinite linear;
+	animation: rotate 2s infinite linear;
+}
+.analysis-loader span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	line-height: 100px;
+	font-family: 'Alef', sans-serif;
+	font-size: 40px;
+	font-weight: normal;
+	color: white;
+}

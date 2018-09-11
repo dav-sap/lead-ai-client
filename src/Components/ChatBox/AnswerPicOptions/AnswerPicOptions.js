@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Loader from "../Loader";
 import './consultants.css';
-import ConsultantCard from "./ConsultantCard/ConsultantCard";
+import ConsultantCard from "../ConsultantCard/ConsultantCard";
 
 export default class AnswerPicOptions extends Component {
 

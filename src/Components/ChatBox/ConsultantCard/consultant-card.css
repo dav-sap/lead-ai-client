@@ -1,0 +1,101 @@
+.consultant-img {
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+	background-color: #d8d8d8;
+	border: solid 4px #eeeeee;
+	border-radius: 80%;
+	position: absolute;
+	top: 0;
+	right: 50%;
+	transform: translateX(50%);
+	z-index: 3;
+	cursor: pointer;
+	transition: top 0.5s linear;
+}
+
+.consultant-card {
+	position: relative;
+	min-height: 128px;
+	min-width: 120px;
+	margin: auto auto 25px;
+	transition: opacity ease-in-out 0.3s;
+}
+
+.glow-low {
+	/*-webkit-filter: blur(6.2px);*/
+	/*filter: blur(6.2px);*/
+	background-color: #d8d8d8;
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+	border-radius: 80%;
+	position: absolute;
+	top: 0;
+	right: 50%;
+	transform: translateX(50%);
+	z-index: 1;
+	transition: filter 0.3s linear, webkit-filter 0.3s linear;
+}
+.glow-high {
+	/*-webkit-filter: blur(16px);*/
+	/*filter: blur(16px);*/
+	transition: filter 0.3s linear, webkit-filter 0.3s linear;
+	background-color: rgba(216, 216, 216, 0.55);
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+	border-radius: 80%;
+	position: absolute;
+	top: 0;
+	right: 50%;
+	transform: translateX(50%);
+	z-index: 1;
+}
+.consultant-img-wrapper {
+	position: relative;
+	width: 98px;
+	height: 98px;
+	margin: auto auto 5px;
+}
+.fa-star {
+	width:14px;
+	height: 14px;
+	margin: 3px;
+	color: white;
+}
+@media only screen and (max-width: 815px) {
+	.consultant-img {
+		width: 80px;
+		height: 80px;
+	}
+	.consultant-img-bw {
+		width: 80px;
+		height: 80px;
+	}
+	.consultant-img-wrapper {
+		position: relative;
+		width: 88px;
+		height: 88px;
+	}
+	.consultant-card {
+		position: relative;
+		min-height: 120px;
+		min-width: 90px;
+		margin-right: 12px;
+		margin-left: 12px;
+	}
+	.glow-low {
+		width: 80px !important;
+		height: 80px;
+	}
+	.glow-high {
+		width: 80px !important;
+		height: 80px;
+	}
+}
+ @keyframes opacity-show {
+	 from {opacity: 0;}
+	 to {opacity: 1;}
+ }
+

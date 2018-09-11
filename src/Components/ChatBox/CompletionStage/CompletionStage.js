@@ -24,13 +24,25 @@ class CompletionStage extends PureComponent {
 				console.error(err);
 			}
 			this.setState({
-					shootConfetti: true
-				}, () => {
-					setTimeout(() => this.setState({shootConfetti: false}), 1000)
-				}
-			)
+				shootConfetti: true
+			});
 		}
 	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.shootConfetti) {
+			setTimeout(() => this.setState({
+				shootConfetti: false
+			}), 1000)
+		}
+	}
+
+	componentDidMount() {
+		setTimeout(() => {
+			this.changeShootConfetti()
+		}, 700)
+	}
+
 
 	render() {
 		return (

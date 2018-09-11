@@ -2,10 +2,8 @@ import React from 'react';
 
 const TITLES = {
     TOP:<div> בוחרים יועץ רכב ומקבלים <br/>ליווי חינם בוואטסאפ.</div>,
-    CLICK_TITLE: <div>הקליקו על הצלם <br/> איתו תרצו להתייעץ.</div>,
     MIDDLE:<div>כל הסודות שחשוב שתדעו לפני שבוחרים רכב חדש.</div>,
     CONSULTANT_TITLE: <div>בחר מומחה וקבל ייעוץ בחינם</div>,
-    // MOBILE_MAIN_TITLE: <div>בוחרים יועץ לחתונה<br/> ומקבלים המלצות בוואטסאפ</div>,
     MOBIE_MIDDLE:<div>כל הסודות שחשוב שתדעו לפני  <br/>שבוחרים צלם לחתונה.</div>,
     FREE_OF_CHARGE:<div>השירות ניתן ללא עלות.</div>,
 };
@@ -15,7 +13,9 @@ const ANSWER_TYPES = {
 	OPTIONS: "options",
 	RADIO_OPTIONS: "radio_options",
 	COMPLETED: "completed",
-	MULTIPLE_OPTIONS: "multiple_options"
+	MULTIPLE_OPTIONS: "multiple_options",
+	NONE: "none",
+	NEXT_QUESTION: "next_question"
 }
 
 const ERROR = "אופס.. תקלה. נסו שוב בבקשה";

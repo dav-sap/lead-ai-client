@@ -11,7 +11,9 @@ import AnswerRadioOptions from "./AnswerRadioOptions/AnswerRadioOptions"
 import { getTimePassed, isMobile, openScreen} from "../Utils";
 import CompletionStage from "./CompletionStage/CompletionStage";
 import AnswerMultipleOptions from "./AnswerMultipleOptions/AnswerMultipleOptions";
-import LastQuestionStage from "./LastQuestionStage/LastQuestionStage";
+import Loader from "./Loader";
+import ConsultantCard from "./ConsultantCard/ConsultantCard";
+import AnalysisLoader from "./AnalysisLoader";
 
 
 export default class ChatBox extends PureComponent {
@@ -68,23 +70,14 @@ export default class ChatBox extends PureComponent {
                 if (resJson.newUser) {
                 	this.dbUser = resJson.newUser._id;
 				}
-
                 setTimeout(() => {
-                	if (resJson.stage.lastQuestion) {
-						this.setState({
-							stage: resJson.stage,
-							showAnswers: true,
-							hideTyper: true
-						})
-					} else {
-						this.setState({
-							stage: resJson.stage,
-							showAnswers: false,
-							questionNumber: this.state.questionNumber + 1,
-						})
-					}
-				}, getTimePassed(startTime, 2))
-
+					this.setState({
+						stage: resJson.stage,
+						showAnswers: false,
+						questionNumber: this.state.questionNumber + 1,
+						innerQuestionIdx: 0
+					})
+				}, getTimePassed(startTime, 1.5))
             } else {
                 this.setState({error: true});
                 console.error(res);
@@ -100,26 +93,23 @@ export default class ChatBox extends PureComponent {
     }
 
     onFinishType = () => {
-        this.setState({showAnswers:true});
+		if (Array.isArray(this.state.stage.question)) {
+			if (this.state.innerQuestionIdx + 1 < this.state.stage.question.length) {
+				this.setState({
+					questionNumber: this.state.questionNumber + 1,
+					innerQuestionIdx: this.state.innerQuestionIdx + 1
+				})
+			} else if (this.state.innerQuestionIdx + 1 === this.state.stage.question.length) {
+				this.submitUserInput("getting next question");
+			}
+		} else {
+			this.setState({showAnswers: true});
+		}
     };
-
-	completedAnalysis = () => {
-		let stage = JSON.parse(JSON.stringify(this.state.stage));
-		stage.lastQuestion = false;
-    	this.setState({
-			hideTyper: false,
-			showAnswers: false,
-			questionNumber: this.state.questionNumber + 1,
-			stage: stage
-		})
-	}
 
 	getComponentToRender = () => {
 		if (!this.state.stage || !this.state.stage.answer) {
 			return ""
-		}
-		if (this.state.stage.lastQuestion) {
-			return <LastQuestionStage completedAnalysis={this.completedAnalysis}/>;
 		}
 		switch (this.state.stage.answer.type) {
 			case ANSWER_TYPES.INPUT:
@@ -131,25 +121,49 @@ export default class ChatBox extends PureComponent {
 			case ANSWER_TYPES.MULTIPLE_OPTIONS:
 				return <AnswerMultipleOptions onSubmit={this.submitUserInput} answer={this.state.stage.answer} error={this.state.error}/>
 			case ANSWER_TYPES.COMPLETED:
-				return <CompletionStage/>
+				return <CompletionStage dbUser={this.dbUser}/>
+			case ANSWER_TYPES.NEXT_QUESTION:
+				return <AnalysisLoader/>
 			default:
 				return "";
 
 		}
 	}
 
-	static getDerivedStateFromProps(nextProps, prevState) {
-		if (prevState.stage && prevState.stage.question && prevState.stage.question !== prevState.questionToShow) {
-			let lines = prevState.stage.question.split('/n');
-			let questionToShow = prevState.stage.question;
-			if (lines.length > 1) {
-				questionToShow = lines.map((line, index) => <span key={index}>{line}<br/></span>)
-			}
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.stage.answer.type === ANSWER_TYPES.NEXT_QUESTION && !this.state.showAnswers) {
+			setTimeout(() => this.setState({
+				showAnswers: true
+			}), 1100)
+		}
+	}
 
-			return {
-				questionToShow: questionToShow
-			}
-		} else return null;
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (!prevState.stage || !prevState.stage.question) {
+			return null;
+		}
+		let question = null;
+		if (Array.isArray(prevState.stage.question)) {
+			question = prevState.stage.question[prevState.innerQuestionIdx]
+		} else {
+			question = prevState.stage.question;
+		}
+		let questionToShow = question;
+
+		let lines = question.split('\n');
+		if (lines.length > 1) {
+			questionToShow = lines.map((line, index) => {
+				if (index + 1 === lines.length) {
+					return <span key={index}>{line}</span>
+				} else {
+					return <span key={index}>{line}<br/></span>
+				}
+			})
+		}
+		return {
+			questionToShow: questionToShow
+		}
 	}
 
 
@@ -163,24 +177,25 @@ export default class ChatBox extends PureComponent {
                 backgroundImage: !isMobile() ? "radial-gradient(circle at 51% 75%, #0d2339, #000000)" : "",
                 minHeight: isMobile() ? "350px" : "450px",
                 }}>
-                
-                <img  alt="" src="/images/hands.png" style={{display:"none"}}/>
+
                 <div className="chat-box">
                     {isMobile() ? <MobileHeader/> : ""}
 					<div className="text-wrapper">
-						{this.state.hideTyper ? "" :
-							<Typist key={this.state.questionNumber} avgTypingDelay={35} stdTypingDelay={0}
-									className="text-typer" startDelay={1500} onTypingDone={this.onFinishType}>
-								<span>
-									{this.state.questionToShow}
-								</span>
-							</Typist>
-						}
+						{this.state.stage.consultantImg ? <ConsultantCard imgPath={this.state.stage.consultantImg} show={this.state.showAnswers}/> : ""}
+						<Typist key={this.state.questionNumber} avgTypingDelay={35} stdTypingDelay={0}
+								className="text-typer" startDelay={Array.isArray(this.state.stage.question) ? 900 : 1800} onTypingDone={this.onFinishType}>
+							<span>
+								{this.state.questionToShow}
+							</span>
+							{Array.isArray(this.state.stage.question) && this.state.innerQuestionIdx + 1 < this.state.stage.question.length ?
+								<Typist.Backspace count={this.state.stage.question[this.state.innerQuestionIdx].length} delay={1500} /> : ""}
+						</Typist>
 					</div>
 					{this.state.showAnswers ?
 						<div className="answer-wrapper">
 							{this.state.error ? <div className="error-msg">{ERROR}</div> : ""}
 							{this.getComponentToRender()}
+							{/*<LastQuestionStage completedAnalysis={this.completedAnalysis} dbUser={this.dbUser}/>*/}
 						</div>
 					: ""}
                 </div>

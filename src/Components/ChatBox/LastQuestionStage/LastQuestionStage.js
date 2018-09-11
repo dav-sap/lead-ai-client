@@ -4,20 +4,24 @@ import Typist from "react-typist";
 
 class LastQuestionStage extends PureComponent {
 
-	state = {
-		percent: 0,
-		textToShow: "",
-		textIndex: -1
-	}
-
-	texts = ['שומר נתונים', 'מאכלס צדיקים', 'טורף יתושים']
-
-	componentDidMount() {
-		this.setState({
+	constructor(props) {
+		super(props);
+		this.texts = ['שומר נתונים...', 'סורק מאגר רכבים..', 'מחפש יועץ רכב פנוי..', 'בינגו! 🍋🍓🥝'];
+		this.state = {
+			percent: 0,
 			textToShow: this.texts[0],
 			textIndex: 0
-		})
+		}
+	}
 
+	async componentDidMount() {
+		// this.setState({
+		// 	textToShow: this.texts[0],
+		// 	textIndex: 0
+		// })
+		let res  = await fetch('/consultants/get_consultant?user=' + this.props.dbUser, {method: 'GET'});
+		let resJson = await res.json();
+		console.log(resJson.user);
 		this.intervalPercent = setInterval(() => {
 			this.setState({
 				percent: this.state.percent + 1
