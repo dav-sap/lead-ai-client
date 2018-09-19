@@ -157,7 +157,7 @@ export default class ChatBox extends PureComponent {
 				if (index + 1 === lines.length) {
 					return <span key={index}>{line}</span>
 				} else {
-					return <span key={index}>{line}<br/></span>
+					return <span key={index}>{line}<br/><Typist.Delay ms={800} /></span>
 				}
 			})
 		}

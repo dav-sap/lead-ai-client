@@ -42,7 +42,7 @@ export default class AnswerRadioOptions extends Component {
 			<div>
 				<div className="radio-button-wrapper">
 					{this.props.answer.options.map((option, index) => {
-						return <RadioButton key={index} value={option} chosen={this.state.chosen} onClick={this.buttonClicked}/>
+						return <RadioButton key={index} value={option} checked={this.state.chosen === option} onClick={this.buttonClicked}/>
 					})}
 				</div>
 				{!this.state.sendLoading ? <NextButton width={203} text={"הבא"} disabled={!this.state.chosen} onClick={this.handleSubmit} buttonClass="lone-button"/>  : <Loader/> }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NextButton from "../../NextButton/NextButton";
 import Loader from "../Loader";
 import RadioButton from "../AnswerRadioOptions/RadioButton";
+import CheckBoxButton from "./CheckBoxButton";
 
 export default class AnswerMultipleOptions extends Component {
 
@@ -48,7 +49,7 @@ export default class AnswerMultipleOptions extends Component {
 			<div>
 				<div className="radio-button-wrapper">
 					{this.props.answer.options.map((option, index) => {
-						return <RadioButton key={index} value={option} checked={this.state.optionsChosen.indexOf(option) > -1} onClick={this.buttonClicked}/>
+						return <CheckBoxButton key={index} value={option} checked={this.state.optionsChosen.indexOf(option) > -1} onClick={this.buttonClicked}/>
 					})}
 				</div>
 				{!this.state.sendLoading ? <NextButton width={203} text={"הבא"} disabled={this.state.optionsChosen.length === 0} onClick={this.handleSubmit} buttonClass="lone-button"/>  : <Loader/> }
