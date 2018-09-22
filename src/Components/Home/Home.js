@@ -4,21 +4,23 @@ import './page-transition.css';
 import Title from './Title/Title';
 import MobileTitle from './Mobile/Title';
 import MobileFooter from './Mobile/Footer';
-import $ from "jquery";
 import {closeScreen, isMobile} from './../Utils'
 import NextButton from '../NextButton/NextButton'
+import mixpanel from "mixpanel-browser";
 
 export default class Home extends Component {
 
-    constructor(props) {
-        super(props);
-
-
-    }
-
-    startChat = async () => {
-		closeScreen();
-		this.props.history.push({pathname: '/chat'})
+    startChat = () => {
+    	try {
+			if (window.navigator.vibrate) {
+				window.navigator.vibrate(60);
+			}
+			mixpanel.track(`Moved to 2nd Screen ${isMobile() ? "MOBILE" : "WEB"}`);
+			closeScreen();
+			this.props.history.push({pathname: '/chat', state: {restartChat: true}})
+		} catch (e) {
+    		console.error(e);
+		}
     }
 
     render() {

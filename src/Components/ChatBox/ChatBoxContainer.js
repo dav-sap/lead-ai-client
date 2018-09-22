@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import { Redirect, Route} from "react-router-dom";
 import ChatBox from "./ChatBox";
-import {getTimePassed, isMobile, openScreenNoAnimation} from "../Utils";
+import {getTimePassed, isMobile, openScreen} from "../Utils";
 import mixpanel from 'mixpanel-browser'
 
 class ChatBoxContainer extends PureComponent {
@@ -10,7 +10,6 @@ class ChatBoxContainer extends PureComponent {
 		if (!this.props.location.state || !this.props.location.state.question  || !this.props.location.state.answer) {
 			this.redirect = true
 		} else {
-			this.stage = {question: this.props.location.state.question, answer: this.props.location.state.answer};
 			this.redirect = false
 		}
 		this.state = {
@@ -29,24 +28,26 @@ class ChatBoxContainer extends PureComponent {
 			}
 			this.setState({error: false});
 			let data = {
-				body: JSON.stringify({_id: this.dbUser, question: question, answer: answer}),
+				body: JSON.stringify({_id: this.dbUser ? this.dbUser._id : null, question: question, answer: answer}),
 				headers: {
 					'content-type': 'application/json'
 				},
 				method: 'POST',
 			};
+			console.log(question);
+			console.log(answer);
 			let startTime = new Date();
 			let res = await fetch("/users/add_chat_answer",data);
 			if (res && res.status === 200) {
 				let resJson = await res.json();
 				if (resJson.newUser) {
-					this.dbUser = resJson.newUser._id;
+					sessionStorage.setItem('user', JSON.stringify(resJson.newUser));
+					this.dbUser = resJson.newUser;
 				}
 				if (!resJson.stage || !resJson.stage.question || !resJson.stage.answer) {
 					throw resJson``
 				}
 				setTimeout(() => {
-					this.stage = resJson.stage;
 					this.questionNumber = this.questionNumber + 1;
 					this.props.history.push({
 						pathname: `/chat/${this.questionNumber}`,
@@ -63,48 +64,52 @@ class ChatBoxContainer extends PureComponent {
 		}
 	};
 
+	errorGoBack = (e) => {
+		console.error(e);
+		openScreen();
+		this.setState({
+			redirect: true
+		});
+	}
+
 	startChat = async () => {
 		try {
-			if (window.navigator.vibrate) {
-				window.navigator.vibrate(60);
-			}
-			if (isMobile()) {
-				mixpanel.track("Moved to 2nd Screen MOBILE");
-			} else {
-				mixpanel.track("Moved to 2nd Screen WEB");
-			}
 			let startTime = new Date();
 			let res = await fetch("/start_chat", {method: "POST"});
 			if (res.status === 200) {
 				let resJson = await res.json();
-
 				setTimeout(() => {
 					this.props.history.push({
 						pathname: `/chat/${this.questionNumber}`,
 						state: {question: resJson.question, answer: resJson.answer}
 					})
-					openScreenNoAnimation();
-					this.state = resJson;
-					this.questionNumber = this.questionNumber + 1;
-				}, getTimePassed(startTime, 2))
+					openScreen();
+				}, getTimePassed(startTime, 1.5))
 			} else {
-				openScreenNoAnimation();
-				this.setState({
-					redirect: true
-				});
+				this.errorGoBack(res);
 			}
 		} catch (e) {
-			console.error(e);
-			openScreenNoAnimation();
-			this.setState({
-				redirect: true
-			});
+			this.errorGoBack(e);
 		}
 	}
 
 	componentDidMount() {
-		this.startChat();
+		if (sessionStorage.getItem('user')) {
+			this.dbUser = JSON.parse(sessionStorage.getItem('user'));
+		}
+		if (this.props.location.state && this.props.location.state.restartChat) {
+			sessionStorage.setItem('user', null);
+			this.dbUser = null;
+			this.startChat();
+		}
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.redirect) {
+			this.openScreen();
+		}
+	}
+
 
 	render() {
 

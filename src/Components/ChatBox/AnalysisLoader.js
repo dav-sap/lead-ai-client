@@ -4,7 +4,7 @@ import "./analysis-loader.css"
 export default class AnalysisLoader extends Component {
 
 	componentDidMount() {
-		let circle, diameter, loader, percentage, starting, total_loading;
+		let circle, diameter, percentage, starting, total_loading;
 
 		window.requestAnimationFrame || (window.requestAnimationFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame);
 		total_loading = 10 * 1100; //10s

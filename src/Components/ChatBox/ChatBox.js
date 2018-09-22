@@ -123,7 +123,7 @@ export default class ChatBox extends PureComponent {
 					</div>
 					{this.state.showAnswers ?
 						<div className="answer-wrapper">
-							{this.state.error ? <div className="error-msg">{ERROR}</div> : ""}
+							{this.props.error ? <div className="error-msg">{ERROR}</div> : ""}
 							{this.getComponentToRender()}
 						</div>
 					: ""}

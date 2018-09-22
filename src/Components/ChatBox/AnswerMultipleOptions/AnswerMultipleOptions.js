@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NextButton from "../../NextButton/NextButton";
 import Loader from "../Loader";
-import RadioButton from "../AnswerRadioOptions/RadioButton";
 import CheckBoxButton from "./CheckBoxButton";
 
 export default class AnswerMultipleOptions extends Component {
