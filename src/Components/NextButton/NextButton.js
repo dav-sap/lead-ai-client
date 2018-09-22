@@ -16,7 +16,7 @@ const NextButton = (props) => {
 				<g>
 					<rect className="border-rect" width={props.width} height="52" rx="18" ry="18" x="1" y="1">
 					</rect>
-					<text className="button-text" x="50%" y="52%" alignmentBaseline="middle" textAnchor="middle">
+					<text className="button-text" x="50%" y="52%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle">
 						{props.text}
 					</text>
 				</g>

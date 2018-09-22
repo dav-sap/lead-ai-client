@@ -1,14 +1,18 @@
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import React, {Component} from "react";
-import ChatBox from "./Components/ChatBox/ChatBox";
 import Home from "./Components/Home/Home";
 import './animations.css';
-
-
+import ChatBoxContainer from "./Components/ChatBox/ChatBoxContainer";
+import mixpanel from "mixpanel-browser";
 
 export default class App extends Component {
-    
-    render() {
+	constructor(props) {
+		super(props);
+		mixpanel.init("51c48d0df1de5595d3eec4fe1add3518");
+		window.addEventListener('touchmove', (e) => {e.preventDefault();});
+	}
+
+	render() {
         
         return (
             <div style={{width:"100%", height: "100%"}}>
@@ -23,7 +27,7 @@ export default class App extends Component {
                 <BrowserRouter>
                     <Switch>
                         <Route  exact path="/" component={Home}/>
-                        <Route  path="/chat" component={ChatBox}/>
+                        <Route  path="/chat" component={ChatBoxContainer}/>
                         <Redirect from='*' to='/' />
                     </Switch>
                 </BrowserRouter>
