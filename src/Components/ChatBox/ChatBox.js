@@ -34,13 +34,16 @@ export default class ChatBox extends PureComponent {
 				return this.setState({
 					innerQuestionIdx: this.state.innerQuestionIdx + 1
 				})
-			} else if (this.answer.type === ANSWER_TYPES.NEXT_QUESTION && this.state.innerQuestionIdx + 1 === this.question.length) {
-				this.props.submitUserInput(this.question,  {value: 'getting next question', key: this.answer.key});
 			}
+			// else if (this.answer.type === ANSWER_TYPES.NEXT_QUESTION && this.state.innerQuestionIdx + 1 === this.question.length) {
+				// this.props.submitUserInput(this.question,  {value: 'getting next question', key: this.answer.key});
+			// }
 		}
 		this.setState({showAnswers: true});
     };
-
+	updateError = (error) => {
+		this.props.updateError(error);
+	}
 	getComponentToRender = () => {
 		if (!this.question || !this.answer) {
 			return ""
@@ -57,11 +60,27 @@ export default class ChatBox extends PureComponent {
 			case ANSWER_TYPES.COMPLETED:
 				return <CompletionStage dbUser={this.props.dbUser}/>
 			case ANSWER_TYPES.NEXT_QUESTION:
-				return <AnalysisLoader/>
+				return <AnalysisLoader  dbUser={this.props.dbUser} updateError={this.updateError} onSubmit={(answer) => this.props.submitUserInput(this.question, {value: answer, key: this.answer.key})} answer={this.answer} error={this.props.error}/>
 			default:
 				return "";
 
 		}
+	}
+
+	manipulateCursorDOM = () => {
+		const cursor = document.getElementsByClassName("Cursor")[0];
+		const cursorCopy = cursor.cloneNode(true);
+		const textType = document.getElementsByClassName("text-typer")[0];
+		let cursorWrapper = document.createElement("span");
+		cursorWrapper.className = "cursor-wrapper";
+		// cursorWrapper.appendChild(cursor);
+		// cursor.remove();
+		textType.appendChild(cursorWrapper);
+		cursorWrapper = document.getElementsByClassName("cursor-wrapper")[0];
+		cursorWrapper.appendChild(cursorCopy);
+
+		// cursor.remove();
+		//.cloneNode(true)
 	}
 
 	componentDidMount() {

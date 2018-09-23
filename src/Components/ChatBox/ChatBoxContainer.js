@@ -15,7 +15,14 @@ class ChatBoxContainer extends PureComponent {
 		this.state = {
 			error: false
 		}
+		if (sessionStorage.getItem('user')) {
+			this.dbUser = JSON.parse(sessionStorage.getItem('user'));
+		}
 		this.questionNumber = 0;
+	}
+
+	updateError = (error) => {
+		this.setState({error});
 	}
 
 	submitUserInput = async (question, answer) => {
@@ -94,9 +101,6 @@ class ChatBoxContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-		if (sessionStorage.getItem('user')) {
-			this.dbUser = JSON.parse(sessionStorage.getItem('user'));
-		}
 		if (this.props.location.state && this.props.location.state.restartChat) {
 			sessionStorage.setItem('user', null);
 			this.dbUser = null;
@@ -118,7 +122,7 @@ class ChatBoxContainer extends PureComponent {
 		}
 		return (
 			<Route path="/chat/:number"  render={(props) => (
-				<ChatBox key={props.match.params.number} {...props} error={this.state.error} dbUser={this.dbUser} submitUserInput={this.submitUserInput}/>)} />
+				<ChatBox key={props.match.params.number} {...props} error={this.state.error} updateError={this.updateError} dbUser={this.dbUser} submitUserInput={this.submitUserInput}/>)} />
 		);
 	}
 }

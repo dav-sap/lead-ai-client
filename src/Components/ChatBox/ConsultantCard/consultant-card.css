@@ -58,6 +58,10 @@
 	height: 98px;
 	margin: auto auto 5px;
 }
+.ratings-wrapper {
+	margin: auto;
+	width: fit-content;
+}
 .fa-star {
 	width:14px;
 	height: 14px;

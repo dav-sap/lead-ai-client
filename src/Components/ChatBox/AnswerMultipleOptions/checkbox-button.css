@@ -14,12 +14,12 @@
 .checkbox polyline {
 	fill: none;
 	stroke: #424950;
-	stroke-width: 1.8;
+	stroke-width: 2.2;
 	stroke-linecap: round;
 	stroke-linejoin: round;
 	stroke-dasharray: 108;
 	stroke-dashoffset: 109;
-	transition: all 300ms cubic-bezier(0.5, -0.5, 0.5, 1.5);
+	transition: all 350ms cubic-bezier(0.5, -0.5, 0.5, 1.5);
 	vector-effect: non-scaling-stroke;
 }
 .checkbox.colored {
@@ -73,4 +73,5 @@
 }
 .checkbox.green:after {
 	background-color: #c2d5a0;
+	background-color: #02c0fd;
 }

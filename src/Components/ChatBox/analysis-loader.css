@@ -13,25 +13,51 @@
 	}
 }
 .analysis-loader {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	-moz-transition: opacity 0.4s;
-	-o-transition: opacity 0.4s;
-	-webkit-transition: opacity 0.4s;
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*top: 35%;*/
+	/*-moz-transform: translate(-50%, -50%);*/
+	/*-ms-transform: translate(-50%, -50%);*/
+	/*-webkit-transform: translate(-50%, -50%);*/
+	/*transform: translate(-50%, -50%);*/
+	/*-moz-transition: opacity 0.4s;*/
+	/*-o-transition: opacity 0.4s;*/
+	/*-webkit-transition: opacity 0.4s;*/
 	transition: opacity 0.4s;
+	position: relative;
+	bottom: 10px;
 }
 
-.analysis-loader svg {
+#Layer_1 {
 	-moz-animation: rotate 2s infinite linear;
 	-webkit-animation: rotate 2s infinite linear;
 	animation: rotate 2s infinite linear;
 }
-.analysis-loader span {
+.analysis-loader polyline {
+	fill: none;
+	stroke: white;
+	stroke-width: 5px;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray: 108;
+	stroke-dashoffset: 109;
+	transition: all 350ms cubic-bezier(0.5, -0.5, 0.5, 1.5);
+	vector-effect: non-scaling-stroke;
+	animation: stroke-offset;
+	animation-delay: 200ms;
+	animation-fill-mode: forwards;
+	animation-duration: 400ms;
+}
+
+@keyframes stroke-offset {
+	from {
+		stroke-dashoffset: 109;
+	}
+	to {
+		stroke-dashoffset: 35;
+	}
+}
+.analysis-loader .loader-percentage {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -39,8 +65,12 @@
 	bottom: 0;
 	text-align: center;
 	line-height: 100px;
-	font-family: 'Alef', sans-serif;
-	font-size: 40px;
-	font-weight: normal;
+	font-family: Heebo, 'Alef', sans-serif;
+	font-size: 30px;
+	/*font-weight:*/
 	color: white;
+}
+.percent-char {
+	position: relative;
+	font-size: 22px;
 }

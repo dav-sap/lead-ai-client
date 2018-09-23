@@ -50,8 +50,9 @@ textarea:focus {
 	}
 }
 .text-typer {
-	width: 100%;
 	position: relative;
+	/*margin: auto;*/
+	/*width: fit-content;*/
 }
 
 
@@ -72,14 +73,25 @@ fieldset {
 	border: 0;
 	padding: 0;
 }
-
+.cursor-wrapper {
+	position: relative;
+	width: 0;
+	height: 0;
+}
+.percent-char {
+	position: relative;
+	font-size: 22px;
+}
 .Cursor {
 	background-color: #ffe500;
-	width: 13px;
+	width: 5px;
 	padding-right: 7px;
 	margin-right: 5px;
 	color: transparent;
 	height: fit-content;
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: -16px;*/
 }
 .Cursor--blinking {
 	opacity: 1;

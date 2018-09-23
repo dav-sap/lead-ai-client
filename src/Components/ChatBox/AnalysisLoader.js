@@ -3,34 +3,62 @@ import "./analysis-loader.css"
 
 export default class AnalysisLoader extends Component {
 
-	componentDidMount() {
-		let circle, diameter, percentage, starting, total_loading;
+	state = {
+		percent: 0,
+		analyzing_completed: null
+	}
 
-		window.requestAnimationFrame || (window.requestAnimationFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame);
-		total_loading = 10 * 1100; //10s
-		diameter = 2 * Math.PI * 48;
-		circle = document.querySelector('circle');
-		percentage = document.getElementsByClassName('loader-percentage')[0];
-		starting = performance.now();
+	starting = performance.now();
+	total_loading = 10 * 1100; //10s
+	diameter = 2 * Math.PI * 48;
+	submitted = false;
 
-		const update = function() {
-			let progress;
-			progress = parseInt(100 * (performance.now() - starting) / total_loading);
-			circle.setAttribute("stroke-dasharray", `${diameter * progress / 100}, ${diameter}`);
-			percentage.innerHTML = progress;
-			if (progress >= 100) {
-				finish();
-				return false;
+
+	async componentDidMount() {
+		this.percentProgressInterval = setInterval(this.updatePercent, 50);
+		this.circle = document.querySelector('circle');
+		this.updatePercent();
+
+		try {
+			let data = {
+				body: JSON.stringify({user: this.props.dbUser}),
+				headers: {
+					'content-type': 'application/json'
+				},
+				method: 'POST',
+			};
+			let res = await fetch("/analyze_data", data);
+			if (res.status === 200) {
+				this.setState({analyzing_completed: true})
+			} else {
+				this.setState({analyzing_completed: false})
+				this.props.updateError(true);
 			}
-			return window.requestAnimationFrame(update);
-		};
+		} catch (e) {
+			this.setState({analyzing_completed: false})
+			this.props.updateError(true);
+		}
 
-		update();
+	}
 
-		const finish = function() {
-			percentage.innerHTML = "✓";
-		};
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.percent === 100 && this.state.analyzing_completed && !this.submitted) {
+			this.props.onSubmit("getting next question");
+			this.submitted = true;
+		} else if (this.state.analyzing_completed === false) {
+			this.props.updateError(true);
+		}
+		if (this.state.percent > 100) {
+			clearInterval(this.percentProgressInterval)
+		}
+	}
 
+	updatePercent = () => {
+		let progress = parseInt(100 * (performance.now() - this.starting) / this.total_loading);
+		this.circle.setAttribute("stroke-dasharray", `${this.diameter * progress / 100}, ${this.diameter}`);
+		this.setState({
+			percent: progress
+		})
 	}
 
 	render() {
@@ -42,7 +70,12 @@ export default class AnalysisLoader extends Component {
         			<circle cx="50" cy="50" r="48" stroke="red" fillOpacity="0" strokeWidth="3" strokeDasharray="0, 301"  />
     			</svg>
 
-				<span className="loader-percentage">0</span>
+				<span className="loader-percentage">{this.state.percent > 100 ?
+					<svg viewBox="0 0 20 20">
+						<polyline points="6.8,11.5 9.1,14.5 13.2,5.5"/>
+					</svg>: this.state.percent}
+					{this.state.percent <= 100 ? <span className="percent-char">%</span> : ""}
+				</span>
 			</div>
 
 		)

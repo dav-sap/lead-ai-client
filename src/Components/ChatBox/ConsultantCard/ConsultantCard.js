@@ -14,7 +14,6 @@ export default class ConsultantCard extends Component {
 		}), 2000)
 	}
 
-
 	render() {
         return (
 
@@ -24,9 +23,11 @@ export default class ConsultantCard extends Component {
 					<div className="glow-low" style={{filter: "blur(6.2px)"}}/>
 					<div className="glow-high" style={{filter: "blur(16px)"}}/>
 				</div>
-				{[...Array(5)].map((one, index) =>
-					<Star key={index}/>
-				)}
+				<div className="ratings-wrapper">
+					{[...Array(5)].map((one, index) =>
+						<Star key={index}/>
+					)}
+				</div>
             </div>
         );
     }
