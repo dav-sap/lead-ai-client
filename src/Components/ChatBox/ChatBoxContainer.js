@@ -18,7 +18,6 @@ class ChatBoxContainer extends PureComponent {
 		if (sessionStorage.getItem('user')) {
 			this.dbUser = JSON.parse(sessionStorage.getItem('user'));
 		}
-		this.questionNumber = 0;
 	}
 
 	updateError = (error) => {
@@ -52,12 +51,11 @@ class ChatBoxContainer extends PureComponent {
 					this.dbUser = resJson.newUser;
 				}
 				if (!resJson.stage || !resJson.stage.question || !resJson.stage.answer) {
-					throw resJson``
+					throw resJson;
 				}
 				setTimeout(() => {
-					this.questionNumber = this.questionNumber + 1;
 					this.props.history.push({
-						pathname: `/chat/${this.questionNumber}`,
+						pathname: `/chat/${resJson.stage.question.key}`,
 						state: {question: resJson.stage.question, answer: resJson.stage.answer, consultantImg: resJson.stage.consultantImg}
 					})
 				}, getTimePassed(startTime, 1.5))
@@ -87,7 +85,7 @@ class ChatBoxContainer extends PureComponent {
 				let resJson = await res.json();
 				setTimeout(() => {
 					this.props.history.push({
-						pathname: `/chat/${this.questionNumber}`,
+						pathname: `/chat/${resJson.question.key}`,
 						state: {question: resJson.question, answer: resJson.answer}
 					})
 					openScreen();

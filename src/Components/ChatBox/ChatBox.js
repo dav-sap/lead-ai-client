@@ -29,15 +29,12 @@ export default class ChatBox extends PureComponent {
 	}
 
     onFinishType = () => {
-		if (Array.isArray(this.question)) {
-			if (this.state.innerQuestionIdx + 1 < this.question.length) {
+		if (Array.isArray(this.question.text)) {
+			if (this.state.innerQuestionIdx + 1 < this.question.text.length) {
 				return this.setState({
 					innerQuestionIdx: this.state.innerQuestionIdx + 1
 				})
 			}
-			// else if (this.answer.type === ANSWER_TYPES.NEXT_QUESTION && this.state.innerQuestionIdx + 1 === this.question.length) {
-				// this.props.submitUserInput(this.question,  {value: 'getting next question', key: this.answer.key});
-			// }
 		}
 		this.setState({showAnswers: true});
     };
@@ -96,10 +93,10 @@ export default class ChatBox extends PureComponent {
 			return "";
 		}
 		let question = null;
-		if (Array.isArray(this.question)) {
-			question = this.question[this.state.innerQuestionIdx]
+		if (Array.isArray(this.question.text)) {
+			question = this.question.text[this.state.innerQuestionIdx]
 		} else {
-			question = this.question;
+			question = this.question.text;
 		}
 		if (!question) {
 			return "";
@@ -112,7 +109,7 @@ export default class ChatBox extends PureComponent {
 				if (index + 1 === lines.length) {
 					return <span key={index}>{line}</span>
 				} else {
-					return <span key={index}>{line}<Typist.Delay ms={350} /><br/></span>
+					return <span key={index}>{line}<Typist.Delay ms={400} /><br/></span>
 				}
 			})
 		}
@@ -132,12 +129,12 @@ export default class ChatBox extends PureComponent {
 					<div className="text-wrapper">
 						{this.consultantImg ? <ConsultantCard imgPath={this.consultantImg} show={this.state.showAnswers}/> : ""}
 						<Typist avgTypingDelay={35} stdTypingDelay={0} key={this.state.innerQuestionIdx}
-								className="text-typer" startDelay={Array.isArray(this.question) ? 900 : 1800} onTypingDone={this.onFinishType}>
+								className="text-typer" startDelay={Array.isArray(this.question.text) ? 900 : 1800} onTypingDone={this.onFinishType}>
 							<span>
 								{this.questionToShow()}
 							</span>
-							{Array.isArray(this.question) && this.state.innerQuestionIdx + 1 < this.question.length ?
-								<Typist.Backspace count={this.question[this.state.innerQuestionIdx].length} delay={1500} /> : ""}
+							{Array.isArray(this.question.text) && this.state.innerQuestionIdx + 1 < this.question.text.length ?
+								<Typist.Backspace count={this.question.text[this.state.innerQuestionIdx].length} delay={1500} /> : ""}
 						</Typist>
 					</div>
 					{this.state.showAnswers ?
