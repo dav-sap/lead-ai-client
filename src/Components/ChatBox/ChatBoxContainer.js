@@ -27,6 +27,7 @@ class ChatBoxContainer extends PureComponent {
 	submitUserInput = async (question, answer) => {
 		try {
 			let audio = document.getElementById("audio-next");
+			mixpanel.track(`Answered Question ${question.key}`);
 			audio.play();
 			if (!answer) {
 				this.setState({error: true});

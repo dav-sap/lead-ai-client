@@ -23,7 +23,11 @@ export default class Home extends Component {
 		}
     }
 
-    render() {
+	componentDidMount() {
+		mixpanel.track(`Showed First Screen ${isMobile() ? "MOBILE" : "WEB"}`);
+	}
+
+	render() {
         return (
             <div className="home-wrapper">
 				{isMobile() ?

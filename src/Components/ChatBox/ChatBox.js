@@ -13,6 +13,7 @@ import CompletionStage from "./CompletionStage/CompletionStage";
 import AnswerMultipleOptions from "./AnswerMultipleOptions/AnswerMultipleOptions";
 import ConsultantCard from "./ConsultantCard/ConsultantCard";
 import AnalysisLoader from "./AnalysisLoader";
+import mixpanel from "mixpanel-browser";
 
 export default class ChatBox extends PureComponent {
 	constructor(props) {
@@ -64,28 +65,13 @@ export default class ChatBox extends PureComponent {
 		}
 	}
 
-	manipulateCursorDOM = () => {
-		const cursor = document.getElementsByClassName("Cursor")[0];
-		const cursorCopy = cursor.cloneNode(true);
-		const textType = document.getElementsByClassName("text-typer")[0];
-		let cursorWrapper = document.createElement("span");
-		cursorWrapper.className = "cursor-wrapper";
-		// cursorWrapper.appendChild(cursor);
-		// cursor.remove();
-		textType.appendChild(cursorWrapper);
-		cursorWrapper = document.getElementsByClassName("cursor-wrapper")[0];
-		cursorWrapper.appendChild(cursorCopy);
-
-		// cursor.remove();
-		//.cloneNode(true)
-	}
-
 	componentDidMount() {
 		if (this.answer.type === ANSWER_TYPES.NEXT_QUESTION) {
 			setTimeout(() => this.setState({
 				showAnswers: true
 			}), 1100)
 		}
+		mixpanel.track(`Showed Question ${this.question.key}`);
 	}
 
 	questionToShow = () => {

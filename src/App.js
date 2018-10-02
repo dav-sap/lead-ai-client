@@ -4,11 +4,12 @@ import Home from "./Components/Home/Home";
 import './animations.css';
 import ChatBoxContainer from "./Components/ChatBox/ChatBoxContainer";
 import mixpanel from "mixpanel-browser";
+const config = require('./config/utils.json')
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
-		mixpanel.init("51c48d0df1de5595d3eec4fe1add3518");
+		mixpanel.init(config.mixpanel.id);
 		window.addEventListener('touchmove', (e) => {e.preventDefault();});
 	}
 

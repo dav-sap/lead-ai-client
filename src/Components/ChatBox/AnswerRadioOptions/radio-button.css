@@ -10,6 +10,7 @@
 	align-items: center;
 	margin: 5px;
 	cursor: pointer;
+	direction: ltr;
 }
 .radio-button:hover {
 	background: rgba(255, 255, 255, 0.1)

@@ -72,7 +72,7 @@ export default class AnalysisLoader extends Component {
 
 				<span className="loader-percentage">{this.state.percent > 100 ?
 					<svg viewBox="0 0 20 20">
-						<polyline points="6.8,11.5 9.1,14.5 13.2,5.5"/>
+						<polyline points="7.7,10.5 9.5,12.0 12.2,7.5"/>
 					</svg>: this.state.percent}
 					{this.state.percent <= 100 ? <span className="percent-char">%</span> : ""}
 				</span>

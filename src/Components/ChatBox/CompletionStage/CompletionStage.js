@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
 import Confetti2 from 'react-dom-confetti';
 
-const config = {
+let config = {
 	angle: 90,
 	spread: 60,
 	startVelocity: 20,
-	elementCount: 30,
+	elementCount: 120,
 	decay: 0.95
 };
 
@@ -33,13 +33,14 @@ class CompletionStage extends PureComponent {
 		if (this.state.shootConfetti) {
 			setTimeout(() => this.setState({
 				shootConfetti: false
-			}), 1000)
+			}), 500)
 		}
 	}
 
 	componentDidMount() {
 		setTimeout(() => {
-			this.changeShootConfetti()
+			this.changeShootConfetti();
+			config.elementCount = 20;
 		}, 700)
 	}
 
