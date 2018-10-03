@@ -15,7 +15,7 @@ export default class Home extends Component {
 			if (window.navigator.vibrate) {
 				window.navigator.vibrate(60);
 			}
-			mixpanel.track(`Moved to 2nd Screen ${isMobile() ? "MOBILE" : "WEB"}`);
+			mixpanel.track(`welcome_screen.clicked`, {"device": `${isMobile() ? "mobile" : "web"}`});
 			closeScreen();
 			this.props.history.push({pathname: '/chat', state: {restartChat: true}})
 		} catch (e) {
@@ -24,7 +24,7 @@ export default class Home extends Component {
     }
 
 	componentDidMount() {
-		mixpanel.track(`Showed First Screen ${isMobile() ? "MOBILE" : "WEB"}`);
+		mixpanel.track(`welcome_screen.viewed`, {"device": `${isMobile() ? "mobile" : "web"}`});
 	}
 
 	render() {

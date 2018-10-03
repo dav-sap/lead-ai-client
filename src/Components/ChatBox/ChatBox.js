@@ -71,7 +71,7 @@ export default class ChatBox extends PureComponent {
 				showAnswers: true
 			}), 1100)
 		}
-		mixpanel.track(`Showed Question ${this.question.key}`);
+		mixpanel.track(`${this.question.event}.viewed`, {"device": `${isMobile() ? "mobile" : "web"}`});
 	}
 
 	questionToShow = () => {
