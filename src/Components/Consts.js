@@ -2,7 +2,7 @@ import React from 'react';
 
 const TITLES = {
     TOP:<div> בוחרים יועץ רכב ומקבלים <br/>ליווי חינם בוואטסאפ.</div>,
-    MIDDLE:<div>כל הסודות שחשוב שתדעו לפני שבוחרים רכב חדש.</div>,
+    MIDDLE:<div>כל מה שחשוב לדעת לפני שבוחרים רכב חדש.</div>,
     CONSULTANT_TITLE: <div>בחר מומחה וקבל ייעוץ בחינם</div>,
     MOBIE_MIDDLE:<div>כל הסודות שחשוב שתדעו לפני  <br/>שבוחרים רכב חדש.</div>,
     FREE_OF_CHARGE:<div>השירות ניתן ללא עלות.</div>,

@@ -1,11 +1,8 @@
 .title {
-    /*font-size: 3.2vw;*/
     display: flex;
     flex-direction: column;
     text-align: center;
     margin: auto;
-    padding-top: 101px;
-    /*height: 255px;*/
 }
 .header-title {
     width: fit-content;
