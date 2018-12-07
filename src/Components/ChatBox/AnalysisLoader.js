@@ -42,7 +42,7 @@ export default class AnalysisLoader extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.percent === 100 && this.state.analyzing_completed && !this.submitted) {
+		if (this.state.percent >= 100 && this.state.analyzing_completed && !this.submitted) {
 			this.props.onSubmit("getting next question");
 			this.submitted = true;
 		} else if (this.state.analyzing_completed === false) {
