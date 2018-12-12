@@ -102,3 +102,14 @@ body::after {
     justify-content: center;
     align-items: baseline;
 }
+
+@media only screen and (max-height: 770px) {
+    .new-service {
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-height: 650px) {
+    .images-wrapper  {
+        display: none;
+    }
+}
